@@ -10,7 +10,7 @@ export default async queryString => {
       params: {
         q: queryString,
         offset: 0,
-        limit: 10,
+        limit: 100,
         'utan-erfarenhet': false,
         dataset: 'auranest'
       }
