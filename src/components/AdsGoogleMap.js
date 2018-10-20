@@ -49,7 +49,7 @@ class MyFancyComponent extends React.PureComponent {
 
   componentDidMount() {
     let { ads } = this.props
-    if (!Object.keys(ads).length === 0 && !ads.constructor === Object) {
+    if (Object.keys(ads).length > 0 && ads.constructor === Object) {
       this.setupMarkers()
     }
   }
