@@ -48,7 +48,10 @@ class MyFancyComponent extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.setupMarkers()
+    let { ads } = this.props
+    if (!Object.keys(ads).length === 0 && !ads.constructor === Object) {
+      this.setupMarkers()
+    }
   }
 
   setupMarkers = async () => {
@@ -72,7 +75,7 @@ class MyFancyComponent extends React.PureComponent {
         .then(response => response.data.results[0])
       return geocode
     } catch (error) {
-      console.log(error)
+      console.log('TCL: MyFancyComponent -> }catch -> error', error)
     }
   }
 
@@ -81,9 +84,6 @@ class MyFancyComponent extends React.PureComponent {
   }
 
   render() {
-    {
-      console.log('this.state.markers', this.state.markers)
-    }
     return (
       <MyMapComponent
         markers={this.state.markers}
