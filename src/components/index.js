@@ -19,6 +19,8 @@ import Title from './reusables/adcomponents/Title'
 import InfoContainer from './reusables/adcomponents/InfoContainer'
 import DescriptionContainer from './reusables/adcomponents/DescriptionContainer'
 
+import AdsGoogleMap from './AdsGoogleMap'
+
 export {
   AdDetailsAf,
   AdDetailsAuranest,
@@ -37,5 +39,6 @@ export {
   SubHeader,
   Title,
   InfoContainer,
-  DescriptionContainer
+  DescriptionContainer,
+  AdsGoogleMap
 }
