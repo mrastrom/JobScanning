@@ -3,6 +3,10 @@ import { AdsGoogleMap } from '../components/'
 
 export default class AdsMap extends Component {
   render() {
-    return <div>{<AdsGoogleMap />}</div>
+    return (
+      <div>
+        <AdsGoogleMap />
+      </div>
+    )
   }
 }

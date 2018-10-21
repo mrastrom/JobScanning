@@ -15,8 +15,9 @@ const SubHeader = ({ siteName }) => (
 export default SubHeader
 
 const StyledHeader = styled.div`
-  grid-row: 2 / 3;
+  grid-row: 1 / 2;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  padding: 0 1rem;
 `

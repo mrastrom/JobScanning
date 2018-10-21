@@ -6,7 +6,9 @@ const DescriptionContainer = ({ text, url }) => (
     <DescriptionBox>
       <h3 style={{ fontSize: '2.4rem' }}>Annons</h3>
       <DescriptionText>{text.substring(0, 700)}</DescriptionText>
-      <StyledLink href={url}>Gå till annonsen</StyledLink>
+      <StyledLink href={url} target="_blank">
+        Gå till annonsen
+      </StyledLink>
     </DescriptionBox>
   </StyledDiv>
 )
@@ -20,7 +22,7 @@ const StyledDiv = styled.div`
 `
 
 const DescriptionBox = styled.div`
-  grid-row: 5 / 6;
+  grid-row: 4 / 5;
   background: ${props => props.theme.white};
   padding: 1rem;
   }

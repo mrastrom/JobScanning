@@ -1,4 +1,3 @@
-import AdDetailsAf from './reusables/AdDetailsAf'
 import AdDetailsAuranest from './reusables/AdDetailsAuranest'
 import BoldText from './reusables/BoldText'
 import ButtonLink from './reusables/ButtonLink'
@@ -7,6 +6,7 @@ import Ellipse from './reusables/Ellipse'
 import FlexContainer from './reusables/FlexContainer'
 import GridContainer from './reusables/GridContainer'
 import LogoPlaceholder from './reusables/LogoPlaceholder'
+import NoResultsBox from './reusables/NoResultsBox'
 import PageHeader from './reusables/PageHeader'
 import PageHeaderAds from './reusables/PageHeaderAds'
 
@@ -22,7 +22,6 @@ import DescriptionContainer from './reusables/adcomponents/DescriptionContainer'
 import AdsGoogleMap from './AdsGoogleMap'
 
 export {
-  AdDetailsAf,
   AdDetailsAuranest,
   AdsList,
   AdsMap,
@@ -34,6 +33,7 @@ export {
   FlexContainer,
   GridContainer,
   LogoPlaceholder,
+  NoResultsBox,
   PageHeader,
   PageHeaderAds,
   SubHeader,
