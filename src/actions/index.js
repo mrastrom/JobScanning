@@ -7,7 +7,10 @@ export const SEARCH_ADS = 'SEARCH_ADS'
 export const searchAds = (term, location) => async dispatch => {
   let queryString = `${term} ${location}`
   let { data } = await getJobList(queryString)
-  console.log('TCL: data', data)
+
+  let sources = data.hits.map(item => item.source.site.name)
+  let uniqueSources = [...new Set(sources)].length
+  data = { ...data, uniqueSources }
 
   dispatch({
     type: SEARCH_TERM,

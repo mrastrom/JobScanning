@@ -36,8 +36,9 @@ class AdsOverview extends Component {
       return (
         <div style={{ padding: '1.5rem' }}>
           <p>
-            Top 10 rekryteringssajter för dig som letar efter annonser för{' '}
-            {term}
+            Top{' '}
+            {this.props.ads.uniqueSources ? this.props.ads.uniqueSources : 0}{' '}
+            rekryteringssajter för dig som letar efter annonser för {term}
           </p>
           <OrderedList>{this.renderOverview()}</OrderedList>
         </div>
