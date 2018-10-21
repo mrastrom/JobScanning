@@ -26,7 +26,7 @@ class SearchPage extends Component {
   }
 
   canBeSubmitted = () => {
-    const { term, location } = this.state
+    const { term } = this.state
     return term.length > 0
   }
 

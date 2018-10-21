@@ -10,7 +10,7 @@ const InfoContainer = ({ location, firstSeenAt, deadline }) => (
       <BoldText>Kommun:</BoldText> {location}
     </p>
     <p>
-      <BoldText>Publicerad:</BoldText> {firstSeenAt}
+      <BoldText>Publicerad:</BoldText> {format(firstSeenAt, 'YYYY-MM-DD HH:mm')}
     </p>
     <p>
       <BoldText>Sök jobbet senast:</BoldText>{' '}
@@ -26,6 +26,6 @@ const InfoContainer = ({ location, firstSeenAt, deadline }) => (
 export default InfoContainer
 
 const StyledDiv = styled.div`
-  grid-row: 4 / 5;
+  grid-row: 3 / 4;
   padding: 1.5rem;
 `

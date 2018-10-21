@@ -1,5 +1,11 @@
 import React from 'react'
-import { SubHeader, Title, InfoContainer, DescriptionContainer } from '../'
+import {
+  GridContainer,
+  SubHeader,
+  Title,
+  InfoContainer,
+  DescriptionContainer
+} from '../'
 
 const AdDetailsAuranest = ({
   application,
@@ -9,10 +15,10 @@ const AdDetailsAuranest = ({
   source,
   header
 }) => (
-  <div>
+  <GridContainer rows={'11vh auto auto auto'}>
     <SubHeader siteName={source.site.name} />
 
-    <Title employerName={employer.name} adHeader={header} />
+    <Title employer={employer} adHeader={header} />
 
     <InfoContainer
       location={location.translations['sv-SE']}
@@ -24,7 +30,7 @@ const AdDetailsAuranest = ({
       text={content.text.substring(0, 700)}
       url={source.url}
     />
-  </div>
+  </GridContainer>
 )
 
 export default AdDetailsAuranest

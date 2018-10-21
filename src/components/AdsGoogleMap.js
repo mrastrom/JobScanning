@@ -26,17 +26,20 @@ const MyMapComponent = compose(
     defaultCenter={{ lat: 62.173276, lng: 14.942265 }}
   >
     {props.markers.map(marker => {
-      const position = {
-        lat: marker.geocode.geometry.location.lat,
-        lng: marker.geocode.geometry.location.lng
+      console.log(marker)
+      if (marker) {
+        const position = {
+          lat: marker.geocode.geometry.location.lat,
+          lng: marker.geocode.geometry.location.lng
+        }
+        return (
+          <Marker
+            key={marker.id}
+            position={position}
+            onClick={props.onMarkerClick}
+          />
+        )
       }
-      return (
-        <Marker
-          key={marker.id}
-          position={position}
-          onClick={props.onMarkerClick}
-        />
-      )
     })}
   </GoogleMap>
 ))
@@ -57,8 +60,10 @@ class MyFancyComponent extends React.PureComponent {
   setupMarkers = async () => {
     const markers = await Promise.all(
       this.props.ads.hits.map(async item => {
-        let geocode = await this.fetchLocation(item.location.googleMaps.id)
-        return { ...item, geocode }
+        if (item.location) {
+          let geocode = await this.fetchLocation(item.location.googleMaps.id)
+          return { ...item, geocode }
+        }
       })
     )
     this.setState({ markers })

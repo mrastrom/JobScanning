@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import _ from 'lodash'
+import { NoResultsBox } from '../components/'
 
 class AdsOverview extends Component {
   renderOverview = () => {
@@ -18,7 +19,7 @@ class AdsOverview extends Component {
 
     return _.map(ordered, key => (
       <ListItem key={key}>
-        <Brand>{key.replace(/^(?:https?:\/\/)?(?:www\.)?/i, '')}</Brand>
+        <Brand>{key}</Brand>
         <Score>
           {scoreboard[key]}
           <p style={{ display: 'inline-block', fontSize: '1.375rem' }}>st</p>
@@ -31,7 +32,7 @@ class AdsOverview extends Component {
     let { ads, term } = this.props
 
     if (Object.keys(ads).length === 0 && ads.constructor === Object) {
-      return <p>Hittade inga annonser</p>
+      return <NoResultsBox />
     } else {
       return (
         <div style={{ padding: '1.5rem' }}>

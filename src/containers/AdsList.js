@@ -2,57 +2,56 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
-import { LogoPlaceholder } from '../components'
+import distanceInWordsStrict from 'date-fns/distance_in_words_strict'
+import format from 'date-fns/format'
+import sv from 'date-fns/locale/sv'
+import _ from 'lodash'
+import { LogoPlaceholder, NoResultsBox } from '../components'
 
 class AdsList extends Component {
+  state = {
+    items: []
+  }
+
   redirectToAdPage = id => {
     this.props.history.push(`/ads/${id}`)
   }
 
   renderAdRow = () => {
     let { hits } = this.props.ads
+    console.log(hits)
 
-    if (hits[0].hasOwnProperty('ansokningsdetaljer')) {
-      return hits.slice(0, 10).map((item, i) => (
-        <ListItem key={i} onClick={() => this.redirectToAdPage(i)}>
-          <LogoPlaceholder>{item.arbetsgivare.arbetsplats}</LogoPlaceholder>
-          <ItemInfo>
-            <ItemTitle>{item.rubrik}</ItemTitle>
-            <p>{item.arbetsplatsadress.kommun}</p>
-            <p>Inlagd: {item.publiceringsdatum}</p>
-            <ItemDeadline>{item.sista_ansokningsdatum}</ItemDeadline>
-          </ItemInfo>
-        </ListItem>
-      ))
-    } else {
-      return hits.slice(0, 10).map((item, i) => (
-        <ListItem key={i} onClick={() => this.redirectToAdPage(i)}>
-          <LogoPlaceholder>{item.employer.name}</LogoPlaceholder>
-          <ItemInfo>
-            <ItemTitle>{item.header}</ItemTitle>
-            <p>
-              {item.location
-                ? item.location.translations['sv-SE']
-                : 'Finns inte'}
-            </p>
-            <p>Inlagd: {item.source.firstSeenAt}</p>
-            <ItemDeadline>
-              {item.application.deadline
-                ? item.application.deadline
-                : 'Se annonsen för datum'}
-            </ItemDeadline>
-          </ItemInfo>
-        </ListItem>
-      ))
-    }
+    // const chunkedArray = _.chunk(hits, 10)
+
+    // console.log('TCL: AdsList -> renderAdRow -> chunkedArray', chunkedArray)
+
+    return hits.map((item, i) => (
+      <ListItem key={i} onClick={() => this.redirectToAdPage(i)}>
+        <LogoPlaceholder employer={item.employer} />
+        <ItemInfo>
+          <ItemTitle>{item.header}</ItemTitle>
+          <p>
+            {item.location ? item.location.translations['sv-SE'] : 'Finns inte'}
+          </p>
+          <p>Inlagd: {format(item.source.firstSeenAt, 'YYYY-MM-DD HH:mm')}</p>
+          <ItemDeadline>
+            {item.application.deadline
+              ? distanceInWordsStrict(Date.now(), item.application.deadline, {
+                  addSuffix: true,
+                  locale: sv
+                })
+              : 'Se annonsen för datum'}
+          </ItemDeadline>
+        </ItemInfo>
+      </ListItem>
+    ))
   }
 
   render() {
     let { ads } = this.props
-    console.log(ads)
 
     if (Object.keys(ads).length === 0 && ads.constructor === Object) {
-      return <p>Hittade inga annonser</p>
+      return <NoResultsBox />
     } else {
       return <List>{this.renderAdRow()}</List>
     }
