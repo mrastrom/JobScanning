@@ -53,7 +53,10 @@ class AdsPage extends Component {
             <DisplayNumber>
               {this.props.ads.total ? this.props.ads.total : 0}
             </DisplayNumber>{' '}
-            jobbannonser från <DisplayNumber>19</DisplayNumber>{' '}
+            jobbannonser från{' '}
+            <DisplayNumber>
+              {this.props.ads.uniqueSources ? this.props.ads.uniqueSources : 0}
+            </DisplayNumber>{' '}
             rekryteringssajter
           </p>
 
