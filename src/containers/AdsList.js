@@ -19,14 +19,10 @@ class AdsList extends Component {
   }
 
   renderAdRow = () => {
-    let { hits } = this.props.ads
-    console.log(hits)
+    let { processedList } = this.props.ads
+    console.log(processedList)
 
-    // const chunkedArray = _.chunk(hits, 10)
-
-    // console.log('TCL: AdsList -> renderAdRow -> chunkedArray', chunkedArray)
-
-    return hits.map((item, i) => (
+    return processedList.map((item, i) => (
       <ListItem key={i} onClick={() => this.redirectToAdPage(i)}>
         <LogoPlaceholder employer={item.employer} />
         <ItemInfo>

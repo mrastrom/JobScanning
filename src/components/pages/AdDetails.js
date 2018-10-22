@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import _ from 'lodash'
 import {
   AdDetailsAuranest,
   GridContainer,
@@ -13,7 +14,13 @@ class AdDetails extends Component {
   }
 
   getAdDetails = index => {
-    if (!this.props.ads.hits) {
+    let { hits, processedList } = this.props.ads
+    let duplicatedGroupId = _.filter(hits, item => {
+      return item.group.id == processedList[index].group.id
+    })
+    console.log('TCL: duplicatedGroupId', duplicatedGroupId)
+
+    if (!processedList) {
       return <NoResultsBox adDetails />
     } else {
       let {
@@ -23,7 +30,7 @@ class AdDetails extends Component {
         content,
         source,
         header
-      } = this.props.ads.hits[index]
+      } = processedList[index]
 
       return (
         <AdDetailsAuranest
@@ -33,6 +40,7 @@ class AdDetails extends Component {
           content={content}
           source={source}
           header={header}
+          duplicatedGroupId={duplicatedGroupId}
         />
       )
     }

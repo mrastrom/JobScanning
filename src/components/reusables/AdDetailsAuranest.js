@@ -13,10 +13,13 @@ const AdDetailsAuranest = ({
   location,
   content,
   source,
-  header
+  header,
+  duplicatedGroupId
 }) => (
   <GridContainer rows={'11vh auto auto auto'}>
-    <SubHeader siteName={source.site.name} />
+    <SubHeader
+      siteName={duplicatedGroupId.length > 1 ? 'Se nedan' : source.site.name}
+    />
 
     <Title employer={employer} adHeader={header} />
 
@@ -28,7 +31,7 @@ const AdDetailsAuranest = ({
 
     <DescriptionContainer
       text={content.text.substring(0, 700)}
-      url={source.url}
+      source={duplicatedGroupId}
     />
   </GridContainer>
 )

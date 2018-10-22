@@ -1,14 +1,26 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const DescriptionContainer = ({ text, url }) => (
+const DescriptionContainer = ({ text, source }) => (
   <StyledDiv>
     <DescriptionBox>
       <h3 style={{ fontSize: '2.4rem' }}>Annons</h3>
       <DescriptionText>{text.substring(0, 700)}</DescriptionText>
-      <StyledLink href={url} target="_blank">
-        Gå till annonsen
-      </StyledLink>
+      {source.length > 1 ? (
+        <MultipleLinks>
+          <p>Vi hittade annonsen på {source.length} olika sajter</p>
+          <p>Välj vilken du vill gå till!</p>
+          {source.map((item, i) => (
+            <a key={i} href={item.source.url} target="_blank">
+              {item.source.site.name}
+            </a>
+          ))}
+        </MultipleLinks>
+      ) : (
+        <StyledLink href={source[0].source.url} target="_blank">
+          Gå till annonsen
+        </StyledLink>
+      )}
     </DescriptionBox>
   </StyledDiv>
 )
@@ -47,4 +59,23 @@ const StyledLink = styled.a`
   background: ${props => props.theme.secondary};
   box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
   border-radius: 10rem;
+`
+
+const MultipleLinks = styled.div`
+  position: absolute;
+  left: 50%;
+  bottom: 15%;
+  transform: translate(-50%, -15%);
+  height: 50%;
+  width: 80%;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+
+  & a {
+    padding: 1.5rem;
+  }
 `
