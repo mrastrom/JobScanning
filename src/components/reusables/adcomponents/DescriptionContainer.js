@@ -23,6 +23,7 @@ const StyledDiv = styled.div`
 
 const DescriptionBox = styled.div`
   grid-row: 4 / 5;
+  position: relative;
   background: ${props => props.theme.white};
   padding: 1rem;
   }
@@ -36,5 +37,14 @@ const DescriptionText = styled.p`
 `
 
 const StyledLink = styled.a`
+  position: absolute;
+  left: 50%;
+  bottom: 15%;
+  transform: translate(-50%, -15%);
+  text-align: center;
+  width: 60%;
+  padding: 1.5rem;
   background: ${props => props.theme.secondary};
+  box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+  border-radius: 10rem;
 `

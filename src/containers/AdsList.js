@@ -7,6 +7,7 @@ import format from 'date-fns/format'
 import sv from 'date-fns/locale/sv'
 import _ from 'lodash'
 import { LogoPlaceholder, NoResultsBox } from '../components'
+import { Loader } from 'semantic-ui-react'
 
 class AdsList extends Component {
   state = {
@@ -51,6 +52,10 @@ class AdsList extends Component {
     let { ads } = this.props
 
     if (Object.keys(ads).length === 0 && ads.constructor === Object) {
+      return <NoResultsBox />
+    } else if (this.props.ads.isFetching) {
+      return <Loader active size="massive" content="Laddar" />
+    } else if (this.props.ads.error) {
       return <NoResultsBox />
     } else {
       return <List>{this.renderAdRow()}</List>

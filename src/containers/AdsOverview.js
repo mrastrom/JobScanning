@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 import _ from 'lodash'
 import { NoResultsBox } from '../components/'
+import { Loader } from 'semantic-ui-react'
 
 class AdsOverview extends Component {
   renderOverview = () => {
@@ -32,6 +33,10 @@ class AdsOverview extends Component {
     let { ads, term } = this.props
 
     if (Object.keys(ads).length === 0 && ads.constructor === Object) {
+      return <NoResultsBox />
+    } else if (this.props.ads.isFetching) {
+      return <Loader active size="massive" content="Laddar" />
+    } else if (this.props.ads.error) {
       return <NoResultsBox />
     } else {
       return (
