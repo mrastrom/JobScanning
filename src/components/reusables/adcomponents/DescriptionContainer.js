@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import images from '../../../images/'
 
 const DescriptionContainer = ({ text, source }) => (
   <StyledDiv>
@@ -10,11 +11,17 @@ const DescriptionContainer = ({ text, source }) => (
         <MultipleLinks>
           <p>Vi hittade annonsen på {source.length} olika sajter</p>
           <p>Välj vilken du vill gå till!</p>
-          {source.map((item, i) => (
-            <a key={i} href={item.source.url} target="_blank">
-              {item.source.site.name}
-            </a>
-          ))}
+          <div>
+            {source.map((item, i) => (
+              <a key={i} href={item.source.url} target="_blank">
+                {[item.source.site.name] in images ? (
+                  <SourceLogo sourceLogo={images[item.source.site.name]} />
+                ) : (
+                  <p>{item.source.site.name}</p>
+                )}
+              </a>
+            ))}
+          </div>
         </MultipleLinks>
       ) : (
         <StyledLink href={source[0].source.url} target="_blank">
@@ -76,6 +83,14 @@ const MultipleLinks = styled.div`
   box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
 
   & a {
-    padding: 1.5rem;
   }
+`
+
+const SourceLogo = styled.div`
+  height: 5rem;
+  width: 10rem;
+  background: ${props => `url(${props.sourceLogo})`};
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 `

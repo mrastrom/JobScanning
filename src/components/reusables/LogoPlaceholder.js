@@ -22,5 +22,5 @@ const StyledH3 = styled.h3`
   word-break: break-word;
   background: ${props => props.theme.brightestSecondary};
   margin: 0 !important;
-  padding: 0.5rem;
+  padding: 1.5rem;
 `
