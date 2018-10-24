@@ -50,29 +50,41 @@ const DescriptionBox = styled.div`
 
 const DescriptionText = styled.p`
   white-space: pre-line;
-  background: -webkit-linear-gradient(#000 0%, #eee 50%, transparent);
+  background: -webkit-linear-gradient(
+    #000 0%,
+    #eee 50%,
+    rgba(255, 255, 255, 0)
+  );
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
 `
 
 const StyledLink = styled.a`
-  position: absolute;
-  left: 50%;
-  bottom: 15%;
-  transform: translate(-50%, -15%);
-  text-align: center;
-  width: 60%;
-  padding: 1.5rem;
-  background: ${props => props.theme.secondary};
-  box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
-  border-radius: 10rem;
+  &:link,
+  &:visited,
+  &:hover,
+  &:active {
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: 700;
+    position: absolute;
+    left: 50%;
+    bottom: 15%;
+    transform: translate(-50%, -15%);
+    text-align: center;
+    width: 60%;
+    padding: 1.5rem;
+    background: ${props => props.theme.secondary};
+    box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+    border-radius: 10rem;
+  }
 `
 
 const MultipleLinks = styled.div`
   position: absolute;
   left: 50%;
-  bottom: 15%;
-  transform: translate(-50%, -15%);
+  bottom: 5%;
+  transform: translate(-50%, -5%);
   height: 50%;
   width: 80%;
   background: #fff;
@@ -81,9 +93,6 @@ const MultipleLinks = styled.div`
   justify-content: center;
   align-items: center;
   box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
-
-  & a {
-  }
 `
 
 const SourceLogo = styled.div`

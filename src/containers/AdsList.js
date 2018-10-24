@@ -6,8 +6,7 @@ import distanceInWordsStrict from 'date-fns/distance_in_words_strict'
 import format from 'date-fns/format'
 import sv from 'date-fns/locale/sv'
 import _ from 'lodash'
-import { LogoPlaceholder, NoResultsBox } from '../components'
-import { Loader } from 'semantic-ui-react'
+import { CustomLoader, LogoPlaceholder, NoResultsBox } from '../components'
 
 class AdsList extends Component {
   state = {
@@ -47,10 +46,10 @@ class AdsList extends Component {
   render() {
     let { ads } = this.props
 
-    if (Object.keys(ads).length === 0 && ads.constructor === Object) {
+    if (this.props.ads.isFetching) {
+      return <CustomLoader />
+    } else if (Object.keys(ads).length === 0 && ads.constructor === Object) {
       return <NoResultsBox />
-    } else if (this.props.ads.isFetching) {
-      return <Loader active size="massive" content="Laddar" />
     } else if (this.props.ads.error) {
       return <NoResultsBox />
     } else {
@@ -87,6 +86,7 @@ const ListItem = styled.li`
 `
 
 const ItemInfo = styled.div`
+  grid-column: 2/3;
   display: grid;
 `
 

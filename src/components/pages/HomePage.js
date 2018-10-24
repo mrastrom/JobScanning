@@ -14,13 +14,13 @@ export default () => {
         <Logo alt="JT" src="/assets/images/jt.png" />
         <p>
           <DisplayNumber>
-            <CountUp start={15000} end={242683} duration={25} separator=" " />
+            <CountUp start={15000} end={294293} duration={8} separator=" " />
           </DisplayNumber>{' '}
           jobbannonser från
         </p>
         <p>
           <DisplayNumber>
-            <CountUp start={0} end={254} duration={15} separator=" " />
+            <CountUp start={0} end={254} duration={10} separator=" " />
           </DisplayNumber>{' '}
           rekryteringssajter
         </p>
