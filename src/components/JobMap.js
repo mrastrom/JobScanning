@@ -15,7 +15,7 @@ import { JobMapWindow } from './index'
 
 const getPixelPositionOffset = (width, height) => ({
   x: -(width / 2),
-  y: -(height / 11)
+  y: -(height - 135)
 })
 
 const MyMapComponent = compose(
@@ -58,7 +58,11 @@ const MyMapComponent = compose(
                 mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
                 getPixelPositionOffset={getPixelPositionOffset}
               >
-                <JobMapWindow marker={marker} />
+                <JobMapWindow
+                  marker={marker}
+                  allMarkers={props.markers}
+                  closeMapWindow={() => props.onMarkerClick(marker)}
+                />
               </OverlayView>
             )}
           </Marker>
@@ -68,7 +72,7 @@ const MyMapComponent = compose(
   </GoogleMap>
 ))
 
-class MyFancyComponent extends React.PureComponent {
+class MyFancyComponent extends React.Component {
   state = {
     markers: []
   }
@@ -105,21 +109,32 @@ class MyFancyComponent extends React.PureComponent {
     }
   }
 
-  handleMarkerClick = marker => {}
+  handleMarkerClick = clickedMarker => {
+    console.log(clickedMarker)
+
+    const updatedMarkers = [...this.state.markers]
+    for (let i = 0; i < updatedMarkers.length; i++) {
+      if (updatedMarkers[i].id === clickedMarker.id) {
+        updatedMarkers[i].isOpen = !updatedMarkers[i].isOpen
+      }
+    }
+    this.setState({ markers: updatedMarkers })
+  }
 
   render() {
     return (
       <MyMapComponent
         markers={this.state.markers}
+        processedList={this.props.processedList}
         onMarkerClick={this.handleMarkerClick}
       />
     )
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps({ ads }) {
   return {
-    ads: state.ads
+    ads
   }
 }
 

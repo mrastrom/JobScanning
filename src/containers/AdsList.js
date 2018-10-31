@@ -18,10 +18,9 @@ class AdsList extends Component {
 
   renderAdRow = () => {
     let { processedList } = this.props.ads
-    console.log(processedList)
 
     return processedList.map((item, i) => (
-      <ListItem key={i} onClick={() => this.redirectToAdPage(i)}>
+      <ListItem key={i} onClick={() => this.redirectToAdPage(item.group.id)}>
         <LogoPlaceholder employer={item.employer} />
         <ItemInfo>
           <ItemTitle>{item.header}</ItemTitle>

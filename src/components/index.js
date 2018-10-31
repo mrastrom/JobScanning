@@ -20,7 +20,7 @@ import Title from './reusables/adcomponents/Title'
 import InfoContainer from './reusables/adcomponents/InfoContainer'
 import DescriptionContainer from './reusables/adcomponents/DescriptionContainer'
 
-import AdsGoogleMap from './AdsGoogleMap'
+import JobMap from './JobMap'
 import JobMapWindow from './JobMapWindow'
 
 export {
@@ -43,6 +43,6 @@ export {
   Title,
   InfoContainer,
   DescriptionContainer,
-  AdsGoogleMap,
+  JobMap,
   JobMapWindow
 }

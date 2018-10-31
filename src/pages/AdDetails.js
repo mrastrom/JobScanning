@@ -13,13 +13,14 @@ class AdDetails extends Component {
     window.scrollTo(0, 0)
   }
 
-  getAdDetails = index => {
+  getAdDetails = groupId => {
+    console.log(groupId)
     let { hits, processedList } = this.props.ads
+
     let duplicatedGroupId = _.filter(hits, item => {
-      return item.group.id === processedList[index].group.id
+      return item.group.id === groupId
     })
     console.log('TCL: duplicatedGroupId', duplicatedGroupId)
-
     if (!processedList) {
       return <NoResultsBox adDetails />
     } else {
@@ -30,8 +31,7 @@ class AdDetails extends Component {
         content,
         source,
         header
-      } = processedList[index]
-
+      } = duplicatedGroupId[0]
       return (
         <AdDetailsAuranest
           application={application}
@@ -56,9 +56,9 @@ class AdDetails extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps({ ads }) {
   return {
-    ads: state.ads
+    ads
   }
 }
 
