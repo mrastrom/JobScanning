@@ -2,11 +2,10 @@ import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import styled, { ThemeProvider } from 'styled-components'
 import theme from './styles/theme'
-import HomePage from './components/pages/HomePage'
-import SearchPage from './components/pages/SearchPage'
-import AdDetails from './components/pages/AdDetails'
-import AdsPage from './components/pages/AdsPage'
-require('dotenv').config()
+import HomePage from './pages/HomePage'
+import SearchPage from './pages/SearchPage'
+import AdDetails from './pages/AdDetails'
+import AdsPage from './pages/AdsPage'
 
 class App extends Component {
   render() {

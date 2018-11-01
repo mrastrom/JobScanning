@@ -16,7 +16,7 @@ import medrek from './sourceLogo/medrek_large.png'
 import metrojobb from './sourceLogo/metrojobb.png'
 import netJobs from './sourceLogo/netjobs.png'
 import offentligaJobb from './sourceLogo/offentliga_jobb.jpeg'
-import platsbanken from './sourceLogo/platsbanken_arbetsförmedlingen.png'
+import platsbanken from './sourceLogo/platsbanken_arbetsförmedlingen.png'
 import restorationHardware from './sourceLogo/restorationhardware.png'
 import resume from './sourceLogo/resume.jpeg'
 import saintElizabethHealthCare from './sourceLogo/saintElisabeth.png'
@@ -26,6 +26,9 @@ import stepstone from './sourceLogo/stepstone.png'
 import sweco from './sourceLogo/sweco.png'
 import teknikjobb from './sourceLogo/teknikjobb.png'
 import tesla from './sourceLogo/tesla.png'
+
+// ===NAME===
+// Means the correct name is unknown
 
 export default {
   'Blocket Jobb': blocketJobb,

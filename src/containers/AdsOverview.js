@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 import _ from 'lodash'
 import { CustomLoader, NoResultsBox } from '../components/'
-import getLogo from '../helpers/getLogo'
+import getLogo from '../utils/getLogo'
 
 class AdsOverview extends Component {
   renderOverview = () => {

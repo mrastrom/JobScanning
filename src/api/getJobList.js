@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export default async queryString => {
+export default async (queryString, locationType, location, offset) => {
   try {
     return await axios({
       method: 'get',
@@ -9,7 +9,8 @@ export default async queryString => {
       headers: { 'api-key': process.env.REACT_APP_DEV_API_KEY },
       params: {
         q: queryString,
-        offset: 0,
+        [locationType]: location,
+        offset: offset,
         limit: 100,
         'utan-erfarenhet': false,
         dataset: 'auranest'
