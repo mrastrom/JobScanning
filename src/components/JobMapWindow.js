@@ -18,9 +18,8 @@ const JobMapWindow = ({ marker, allMarkers, closeMapWindow, history }) => {
           employer,
           group,
           header,
-          id,
           location: { translations },
-          source: { firstSeenAt, url }
+          source: { firstSeenAt }
         } = item
 
         if (item.location.googleMaps.id === marker.location.googleMaps.id) {

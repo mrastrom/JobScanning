@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export default async (queryString, locationType, location) => {
+export default async (queryString, locationType, location, offset) => {
   try {
     return await axios({
       method: 'get',
@@ -10,8 +10,8 @@ export default async (queryString, locationType, location) => {
       params: {
         q: queryString,
         [locationType]: location,
-        offset: 0,
-        limit: 10,
+        offset: offset,
+        limit: 100,
         'utan-erfarenhet': false,
         dataset: 'auranest'
       }

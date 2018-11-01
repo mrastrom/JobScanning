@@ -1,6 +1,5 @@
 import React from 'react'
 import axios from 'axios'
-import _ from 'lodash'
 import { connect } from 'react-redux'
 import { compose, withProps } from 'recompose'
 import {
@@ -78,13 +77,15 @@ class MyFancyComponent extends React.Component {
   }
 
   componentDidMount() {
-    this.setupMarkers()
+    if (this.props.ads.processedList) {
+      this.setupMarkers()
+    }
   }
 
   setupMarkers = async () => {
     const markers = await Promise.all(
       this.props.ads.processedList.map(async item => {
-        if (item.location) {
+        if (item.location.googleMaps.id) {
           let geocode = await this.fetchLocation(item.location.googleMaps.id)
           return { ...item, geocode }
         }
