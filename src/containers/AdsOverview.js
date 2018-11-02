@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import _ from 'lodash'
-import { NoResultsBox } from '../components/'
+import { CustomLoader, NoResultsBox } from '../components/'
+import getLogo from '../utils/getLogo'
 
 class AdsOverview extends Component {
   renderOverview = () => {
@@ -19,7 +20,7 @@ class AdsOverview extends Component {
 
     return _.map(ordered, key => (
       <ListItem key={key}>
-        <Brand>{key}</Brand>
+        <Brand>{getLogo(key)}</Brand>
         <Score>
           {scoreboard[key]}
           <p style={{ display: 'inline-block', fontSize: '1.375rem' }}>st</p>
@@ -31,7 +32,11 @@ class AdsOverview extends Component {
   render() {
     let { ads, term } = this.props
 
-    if (Object.keys(ads).length === 0 && ads.constructor === Object) {
+    if (this.props.ads.isFetching) {
+      return <CustomLoader />
+    } else if (Object.keys(ads).length === 0 && ads.constructor === Object) {
+      return <NoResultsBox />
+    } else if (this.props.ads.error) {
       return <NoResultsBox />
     } else {
       return (
@@ -72,8 +77,8 @@ const Brand = styled.div`
 `
 
 const Score = styled.span`
-  height: 4rem;
-  width: 4rem;
+  height: 5rem;
+  width: 5rem;
   color: ${props => props.theme.white};
   font-size: ${props => props.theme.fontSizeLarge};
   font-weight: 600;
@@ -86,6 +91,10 @@ const Score = styled.span`
 
 const OrderedList = styled.ol`
   list-style: none;
+
+  & li {
+    margin-top: 1rem;
+  }
 
   & :nth-child(3n + 1) span {
     background: ${props => props.theme.primary};

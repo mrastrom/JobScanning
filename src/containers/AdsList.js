@@ -1,73 +1,106 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { fetchMoreAds } from '../actions/index'
 import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import distanceInWordsStrict from 'date-fns/distance_in_words_strict'
 import format from 'date-fns/format'
 import sv from 'date-fns/locale/sv'
-import _ from 'lodash'
-import { LogoPlaceholder, NoResultsBox } from '../components'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import { CustomLoader, LogoPlaceholder, NoResultsBox } from '../components'
 
 class AdsList extends Component {
   state = {
-    items: []
+    items: [],
+    offset: 0
   }
 
   redirectToAdPage = id => {
     this.props.history.push(`/ads/${id}`)
   }
 
-  renderAdRow = () => {
-    let { hits } = this.props.ads
-    console.log(hits)
+  fetchMoreData = () => {
+    this.setState(prevState => ({
+      offset: prevState.offset + 100
+    }))
+    console.log(this.state.offset)
 
-    // const chunkedArray = _.chunk(hits, 10)
-
-    // console.log('TCL: AdsList -> renderAdRow -> chunkedArray', chunkedArray)
-
-    return hits.map((item, i) => (
-      <ListItem key={i} onClick={() => this.redirectToAdPage(i)}>
-        <LogoPlaceholder employer={item.employer} />
-        <ItemInfo>
-          <ItemTitle>{item.header}</ItemTitle>
-          <p>
-            {item.location ? item.location.translations['sv-SE'] : 'Finns inte'}
-          </p>
-          <p>Inlagd: {format(item.source.firstSeenAt, 'YYYY-MM-DD HH:mm')}</p>
-          <ItemDeadline>
-            {item.application.deadline
-              ? distanceInWordsStrict(Date.now(), item.application.deadline, {
-                  addSuffix: true,
-                  locale: sv
-                })
-              : 'Se annonsen för datum'}
-          </ItemDeadline>
-        </ItemInfo>
-      </ListItem>
-    ))
+    this.props.fetchMoreAds(
+      this.props.term,
+      this.props.location,
+      this.state.offset
+    )
   }
 
   render() {
     let { ads } = this.props
 
-    if (Object.keys(ads).length === 0 && ads.constructor === Object) {
+    if (this.props.ads.isFetching) {
+      return <CustomLoader />
+    } else if (Object.keys(ads).length === 0 && ads.constructor === Object) {
+      return <NoResultsBox />
+    } else if (this.props.ads.error) {
       return <NoResultsBox />
     } else {
-      return <List>{this.renderAdRow()}</List>
+      return (
+        <List>
+          <InfiniteScroll
+            dataLength={this.props.ads.processedList.length}
+            next={this.fetchMoreData}
+            hasMore={true}
+            loader={<h4>Loading...</h4>}
+          >
+            {this.props.ads.processedList.map((item, i) => (
+              <ListItem
+                key={i}
+                onClick={() => this.redirectToAdPage(item.group.id)}
+              >
+                <LogoPlaceholder employer={item.employer} />
+                <ItemInfo>
+                  <ItemTitle>{item.header}</ItemTitle>
+                  <p>
+                    {item.location
+                      ? item.location.translations['sv-SE']
+                      : 'Finns inte'}
+                  </p>
+                  <p>
+                    Inlagd:{' '}
+                    {format(item.source.firstSeenAt, 'YYYY-MM-DD HH:mm')}
+                  </p>
+                  <ItemDeadline>
+                    {item.application.deadline
+                      ? distanceInWordsStrict(
+                          Date.now(),
+                          item.application.deadline,
+                          {
+                            addSuffix: true,
+                            locale: sv
+                          }
+                        )
+                      : 'Se annonsen för datum'}
+                  </ItemDeadline>
+                </ItemInfo>
+              </ListItem>
+            ))}
+          </InfiniteScroll>
+        </List>
+      )
     }
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps({ ads, term, location }) {
   return {
-    ads: state.ads
+    ads,
+    term,
+    location
   }
 }
 
 export default withRouter(
   connect(
     mapStateToProps,
-    null
+    { fetchMoreAds }
   )(AdsList)
 )
 
@@ -86,6 +119,7 @@ const ListItem = styled.li`
 `
 
 const ItemInfo = styled.div`
+  grid-column: 2/3;
   display: grid;
 `
 

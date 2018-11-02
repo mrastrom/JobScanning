@@ -5,6 +5,7 @@ import DisplayNumber from './reusables/DisplayNumber'
 import Ellipse from './reusables/Ellipse'
 import FlexContainer from './reusables/FlexContainer'
 import GridContainer from './reusables/GridContainer'
+import CustomLoader from './reusables/CustomLoader'
 import LogoPlaceholder from './reusables/LogoPlaceholder'
 import NoResultsBox from './reusables/NoResultsBox'
 import PageHeader from './reusables/PageHeader'
@@ -19,7 +20,8 @@ import Title from './reusables/adcomponents/Title'
 import InfoContainer from './reusables/adcomponents/InfoContainer'
 import DescriptionContainer from './reusables/adcomponents/DescriptionContainer'
 
-import AdsGoogleMap from './AdsGoogleMap'
+import JobMap from './JobMap'
+import JobMapWindow from './JobMapWindow'
 
 export {
   AdDetailsAuranest,
@@ -32,6 +34,7 @@ export {
   Ellipse,
   FlexContainer,
   GridContainer,
+  CustomLoader,
   LogoPlaceholder,
   NoResultsBox,
   PageHeader,
@@ -40,5 +43,6 @@ export {
   Title,
   InfoContainer,
   DescriptionContainer,
-  AdsGoogleMap
+  JobMap,
+  JobMapWindow
 }

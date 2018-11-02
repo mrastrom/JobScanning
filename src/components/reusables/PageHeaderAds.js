@@ -12,7 +12,7 @@ class PageHeaderAds extends Component {
         <DropShadow>
           <EllipseBig>
             <Link to="/">
-              <Logo alt="JT" src="/assets/images/jt2.png" />
+              <Logo alt="JT" src="/assets/images/jt.png" />
             </Link>
           </EllipseBig>
         </DropShadow>
