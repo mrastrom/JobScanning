@@ -33,7 +33,7 @@ class AdsOverview extends Component {
     let { ads, term } = this.props
 
     if (this.props.ads.isFetching) {
-      return <CustomLoader />
+      return <CustomLoader size="massive" content="Laddar" />
     } else if (Object.keys(ads).length === 0 && ads.constructor === Object) {
       return <NoResultsBox />
     } else if (this.props.ads.error) {

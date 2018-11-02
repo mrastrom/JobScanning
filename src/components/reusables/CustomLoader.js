@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { Loader } from 'semantic-ui-react'
 
-const CustomLoader = () => (
-  <StyledLoader active size="massive" content="Laddar" />
+const CustomLoader = ({ size, content }) => (
+  <StyledLoader active size={size} content={content} />
 )
 
 export default CustomLoader

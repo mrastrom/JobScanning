@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import CountUp from 'react-countup'
 import theme from '../styles/theme'
+import homePageBackground from '../images/background.png'
 
 import { ButtonLink, DisplayNumber } from '../components'
 import { diagonalSlide } from '../styles/animations/diagonalSlide'
@@ -38,7 +39,7 @@ export default () => {
 const Background = styled.div`
   height: 3000px;
   width: 3000px;
-  background: url('./assets/images/background.png') repeat;
+  background: url('${homePageBackground}') repeat;
   background-position: right bottom;
   animation: ${diagonalSlide} 20s linear infinite;
   position: absolute;
@@ -52,7 +53,7 @@ const Header = styled.header`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 55vh;
+  min-height: 55vh;
   padding: 2.5rem 0 4rem;
   background: ${props => props.theme.secondary};
   border-bottom-left-radius: 90% 80%;

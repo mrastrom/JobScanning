@@ -36,7 +36,7 @@ class AdsList extends Component {
     let { ads } = this.props
 
     if (this.props.ads.isFetching) {
-      return <CustomLoader />
+      return <CustomLoader size="massive" content="Laddar" />
     } else if (Object.keys(ads).length === 0 && ads.constructor === Object) {
       return <NoResultsBox />
     } else if (this.props.ads.error) {
@@ -48,7 +48,16 @@ class AdsList extends Component {
             dataLength={this.props.ads.processedList.length}
             next={this.fetchMoreData}
             hasMore={true}
-            loader={<h4>Loading...</h4>}
+            loader={
+              <div
+                style={{
+                  position: 'relative',
+                  marginTop: '5rem'
+                }}
+              >
+                <CustomLoader size="big" content="Hämtar fler" />
+              </div>
+            }
           >
             {this.props.ads.processedList.map((item, i) => (
               <ListItem

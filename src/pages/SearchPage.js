@@ -48,7 +48,7 @@ class SearchPage extends Component {
             component.types.includes('locality')
           ) {
             for (let i = 0; i < countiesAndMunicipalities.length; i++) {
-              if (countiesAndMunicipalities[i].key === component.long_name) {
+              if (countiesAndMunicipalities[i].text === component.long_name) {
                 this.setState({
                   location: countiesAndMunicipalities[i].value
                 })
