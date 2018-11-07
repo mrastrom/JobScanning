@@ -85,10 +85,8 @@ class MyFancyComponent extends React.Component {
   setupMarkers = async () => {
     const markers = await Promise.all(
       this.props.ads.processedList.map(async item => {
-        if (item.location.googleMaps.id) {
-          let geocode = await this.fetchLocation(item.location.googleMaps.id)
-          return { ...item, geocode }
-        }
+        let geocode = await this.fetchLocation(item.location.googleMaps.id)
+        return { ...item, geocode }
       })
     )
     this.setState({ markers })
