@@ -116,10 +116,12 @@ class SearchPage extends Component {
               options={countiesAndMunicipalities}
             />
           </Form.Field>
-          <Checkbox
+
+          <CustomCheckbox
             onChange={this.getCurrentPosition}
             label="Använd min nuvarande position"
           />
+
           <CustomButton type="submit" disabled={!isEnabled}>
             Sök
           </CustomButton>
@@ -142,22 +144,28 @@ export default connect(
 )(SearchPage)
 
 const CustomForm = styled(Form)`
-  display: flex;
-  flex-direction: column;
-  height: 430px;
-  width: 88%;
-  padding: 3rem 2rem;
-  background: ${props => props.theme.primary};
-  box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
-  border-radius: 5px;
+  &&& {
+    display: flex;
+    flex-direction: column;
+    height: 430px;
+    width: 88%;
+    padding: 3rem 2rem;
+    background: ${props => props.theme.primary};
+    box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
 
-  &&& * {
-    font-size: 16px;
-    /* font-family: 'Open Sans', sans-serif; */
-  }
+    &&& * {
+      font-size: 16px;
+      /* font-family: 'Open Sans', sans-serif; */
+    }
 
-  &&& > div {
-    margin-top: 1rem;
+    &&& > div {
+      margin-top: 1rem;
+    }
+
+    @media only screen and (min-width: 500px) {
+      max-width: 50%;
+    }
   }
 `
 
@@ -189,6 +197,32 @@ const CustomButton = styled(Button)`
       background: ${props => props.theme.brightestSecondary};
       box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.2) !important;
       opacity: 1 !important;
+    }
+  }
+`
+
+const CustomCheckbox = styled(Checkbox)`
+  &&& {
+    & label {
+      padding-left: 0;
+    }
+
+    & label:before {
+      left: auto;
+      right: 0;
+      height: 30px;
+      width: 30px;
+    }
+
+    & label:after {
+      left: auto;
+      right: 13px;
+      top: 6px;
+      font-size: 30px;
+    }
+
+    &.ui.checkbox input:checked ~ label:after {
+      color: ${props => props.theme.secondary};
     }
   }
 `

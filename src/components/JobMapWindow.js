@@ -68,7 +68,7 @@ const MapWindow = styled.div`
   display: flex;
   flex-wrap: wrap;
   background: #fff;
-
+  z-index: 1000;
   padding: 1rem 0 1rem 1rem;
 `
 

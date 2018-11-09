@@ -85,20 +85,27 @@ class MyFancyComponent extends React.Component {
   setupMarkers = async () => {
     let { processedList } = this.props.ads
     const removedUnknownLocations = processedList.filter(item => item.location)
+    let test = removedUnknownLocations.map(
+      item => item.location.translations['sv-SE']
+    )
+    let testing = [...new Set(test)]
+    console.log(testing)
+
     const markers = await Promise.all(
       removedUnknownLocations.map(async item => {
-        let geocode = await this.fetchLocation(item.location.googleMaps.id)
+        let geocode = await this.fetchLocation(
+          item.location.translations['sv-SE']
+        )
         return { ...item, geocode }
       })
     )
     this.setState({ markers })
   }
-
-  fetchLocation = async googleMapsId => {
+  fetchLocation = async address => {
     try {
       let geocode = await axios
         .get(
-          `https://maps.googleapis.com/maps/api/geocode/json?place_id=${googleMapsId}&key=${
+          `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${
             process.env.REACT_APP_DEV_GOOGLE_MAPS_API_KEY
           }`
         )
