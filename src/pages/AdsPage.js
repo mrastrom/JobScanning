@@ -37,52 +37,55 @@ class AdsPage extends Component {
 
     return (
       <FlexContainer>
-        <GridContainer rows={'13vh auto 6% 1fr'}>
-          <PageHeaderAds />
+        <GridContainer rows={'auto 1fr'}>
+          <FixedDiv>
+            <PageHeaderAds />
 
-          <p
-            style={{
-              fontSize: theme.fontSizeMedium,
-              margin: '0',
-              alignSelf: 'center',
-              textAlign: 'center',
-              padding: '1rem 0'
-            }}
-          >
-            <DisplayNumber>
-              {this.props.ads.total ? this.props.ads.total : 0}
-            </DisplayNumber>{' '}
-            jobbannonser från{' '}
-            <DisplayNumber>
-              {this.props.ads.uniqueSources ? this.props.ads.uniqueSources : 0}
-            </DisplayNumber>{' '}
-            rekryteringssajter
-          </p>
+            <p
+              style={{
+                fontSize: theme.fontSizeMedium,
+                margin: '0',
+                alignSelf: 'center',
+                textAlign: 'center',
+                padding: '1rem 0'
+              }}
+            >
+              <DisplayNumber>
+                {this.props.ads.total ? this.props.ads.total : 0}
+              </DisplayNumber>{' '}
+              jobbannonser från{' '}
+              <DisplayNumber>
+                {this.props.ads.uniqueSources
+                  ? this.props.ads.uniqueSources
+                  : 0}
+              </DisplayNumber>{' '}
+              rekryteringssajter
+            </p>
 
-          <CustomMenu borderless fluid widths={3}>
-            <CustomMenuItem
-              name="list"
-              active={activeItem === 'list'}
-              content="Lista"
-              onClick={this.handleItemClick}
-            />
+            <CustomMenu borderless fluid widths={3}>
+              <CustomMenuItem
+                name="list"
+                active={activeItem === 'list'}
+                content="Lista"
+                onClick={this.handleItemClick}
+              />
 
-            <CustomMenuItem
-              name="map"
-              active={activeItem === 'map'}
-              content="Karta"
-              onClick={this.handleItemClick}
-            />
+              <CustomMenuItem
+                name="map"
+                active={activeItem === 'map'}
+                content="Karta"
+                onClick={this.handleItemClick}
+              />
 
-            <CustomMenuItem
-              name="overview"
-              active={activeItem === 'overview'}
-              content="Översikt"
-              onClick={this.handleItemClick}
-            />
-          </CustomMenu>
-
-          {activeComponent}
+              <CustomMenuItem
+                name="overview"
+                active={activeItem === 'overview'}
+                content="Översikt"
+                onClick={this.handleItemClick}
+              />
+            </CustomMenu>
+          </FixedDiv>
+          <MarginTopDiv>{activeComponent}</MarginTopDiv>
         </GridContainer>
       </FlexContainer>
     )
@@ -149,4 +152,18 @@ const CustomMenuItem = styled(Menu.Item)`
       background: none;
     }
   }
+`
+
+const FixedDiv = styled.div`
+  display: grid;
+  grid-template-rows: 13vh 6vh 7vh;
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: #fff;
+`
+
+const MarginTopDiv = styled.div`
+  margin-top: 26vh;
 `
