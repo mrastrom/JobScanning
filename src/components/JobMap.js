@@ -103,6 +103,7 @@ class MyFancyComponent extends React.Component {
         this.setState(prevState => ({
           markers: [...prevState.markers, item]
         }))
+        return item
       })
     }
 
