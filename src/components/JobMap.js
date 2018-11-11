@@ -49,6 +49,7 @@ const MyMapComponent = compose(
           <Marker
             key={marker.id}
             position={position}
+            defaultAnimation={4}
             onClick={() => props.onMarkerClick(marker)}
           >
             {marker.isOpen && (
@@ -115,7 +116,15 @@ class MyFancyComponent extends React.Component {
     //   })
     // )
     // this.setState({ markers })
-    // console.log('markers', markers)
+
+    // removedUnknownLocations.map(async item => {
+    //   let geocode = await fetchLocation(item.location.translations['sv-SE'])
+    //   item = { ...item, geocode }
+    //   this.setState(prevState => ({
+    //     markers: [...prevState.markers, item]
+    //   }))
+    //   console.log(this.state.markers)
+    // })
   }
 
   handleMarkerClick = clickedMarker => {

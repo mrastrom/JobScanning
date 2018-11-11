@@ -109,6 +109,11 @@ const OrderedList = styled.ol`
   }
 
   & :nth-child(3n + 1) span:before {
+    /* content: '';
+    height: 18px;
+    width: 14rem;
+    position: absolute;
+    left: -10px; */
     background: ${props => props.theme.primary};
   }
 
@@ -118,5 +123,14 @@ const OrderedList = styled.ol`
 
   & :nth-child(3n) span:before {
     background: ${props => props.theme.brightSecondary};
+  }
+
+  & :nth-child(1n + 1) span:before {
+    content: '';
+    height: 18px;
+    width: 5rem * 1n + 1;
+    position: absolute;
+    left: -10px;
+    z-index: -1;
   }
 `
