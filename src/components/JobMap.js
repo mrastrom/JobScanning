@@ -84,11 +84,11 @@ class MyFancyComponent extends React.Component {
   }
 
   setupMarkers = async () => {
-    let { processedList } = this.props.ads
+    const { processedList } = this.props.ads
     const removedUnknownLocations = processedList.filter(item => item.location)
 
-    let groupedByLocation = removedUnknownLocations.reduce((acc, obj) => {
-      let key = obj.location.translations['sv-SE']
+    const groupedByLocation = removedUnknownLocations.reduce((acc, obj) => {
+      const key = obj.location.translations['sv-SE']
       if (!acc[key]) {
         acc[key] = []
       }
@@ -98,24 +98,13 @@ class MyFancyComponent extends React.Component {
 
     for (const key in groupedByLocation) {
       const locationInfo = await fetchLocation(key)
-
-      if (groupedByLocation.hasOwnProperty(key)) {
-        groupedByLocation[key].map(item => {
-          return (item.geocode = locationInfo)
-        })
-      }
+      groupedByLocation[key].map(item => {
+        item.geocode = locationInfo
+        this.setState(prevState => ({
+          markers: [...prevState.markers, item]
+        }))
+      })
     }
-
-    const markers = [].concat(...Object.values(groupedByLocation))
-    this.setState({ markers })
-
-    // const markers = await Promise.all(
-    //   removedUnknownLocations.map(async item => {
-    //     let geocode = await fetchLocation(item.location.translations['sv-SE'])
-    //     return { ...item, geocode }
-    //   })
-    // )
-    // this.setState({ markers })
 
     // removedUnknownLocations.map(async item => {
     //   let geocode = await fetchLocation(item.location.translations['sv-SE'])
@@ -123,7 +112,6 @@ class MyFancyComponent extends React.Component {
     //   this.setState(prevState => ({
     //     markers: [...prevState.markers, item]
     //   }))
-    //   console.log(this.state.markers)
     // })
   }
 
