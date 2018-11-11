@@ -156,7 +156,7 @@ const CustomMenuItem = styled(Menu.Item)`
 
 const FixedDiv = styled.div`
   display: grid;
-  grid-template-rows: 13vh 6vh 7vh;
+  grid-template-rows: 13vh auto 7vh;
   position: fixed;
   left: 0;
   right: 0;

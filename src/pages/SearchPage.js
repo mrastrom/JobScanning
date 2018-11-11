@@ -72,14 +72,7 @@ class SearchPage extends Component {
     })
   }
 
-  canBeSubmitted = () => {
-    const { term } = this.state
-    return term.length > 0
-  }
-
   render() {
-    const isEnabled = this.canBeSubmitted()
-
     return (
       <GridContainer rows={'13% 6% 1fr'} gap={true} center={true}>
         <PageHeader>
@@ -110,10 +103,11 @@ class SearchPage extends Component {
               name="location"
               value={this.state.location}
               onChange={this.handleChange}
-              placeholder="Skriv sökord"
+              placeholder="Ange plats"
               search
               selection
               options={countiesAndMunicipalities}
+              upward
             />
           </Form.Field>
 
@@ -122,7 +116,10 @@ class SearchPage extends Component {
             label="Använd min nuvarande position"
           />
 
-          <CustomButton type="submit" disabled={!isEnabled}>
+          <CustomButton
+            type="submit"
+            disabled={this.state.term.length > 0 ? false : true}
+          >
             Sök
           </CustomButton>
         </CustomForm>
@@ -156,7 +153,6 @@ const CustomForm = styled(Form)`
 
     &&& * {
       font-size: 16px;
-      /* font-family: 'Open Sans', sans-serif; */
     }
 
     &&& > div {
@@ -205,6 +201,7 @@ const CustomCheckbox = styled(Checkbox)`
   &&& {
     & label {
       padding-left: 0;
+      line-height: 1.9em;
     }
 
     & label:before {
@@ -217,7 +214,6 @@ const CustomCheckbox = styled(Checkbox)`
     & label:after {
       left: auto;
       right: 13px;
-      top: 6px;
       font-size: 30px;
     }
 

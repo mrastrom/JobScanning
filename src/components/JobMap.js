@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from 'axios'
 import { connect } from 'react-redux'
 import { compose, withProps } from 'recompose'
 import {
@@ -11,6 +10,7 @@ import {
 } from 'react-google-maps'
 import MarkerClusterer from 'react-google-maps/lib/components/addons/MarkerClusterer'
 import { JobMapWindow } from './index'
+import fetchLocation from '../api/fetchLocation'
 
 const getPixelPositionOffset = (width, height) => ({
   x: -(width / 2),
@@ -85,35 +85,37 @@ class MyFancyComponent extends React.Component {
   setupMarkers = async () => {
     let { processedList } = this.props.ads
     const removedUnknownLocations = processedList.filter(item => item.location)
-    let test = removedUnknownLocations.map(
-      item => item.location.translations['sv-SE']
-    )
-    let testing = [...new Set(test)]
-    console.log(testing)
 
-    const markers = await Promise.all(
-      removedUnknownLocations.map(async item => {
-        let geocode = await this.fetchLocation(
-          item.location.translations['sv-SE']
-        )
-        return { ...item, geocode }
-      })
-    )
-    this.setState({ markers })
-  }
-  fetchLocation = async address => {
-    try {
-      let geocode = await axios
-        .get(
-          `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${
-            process.env.REACT_APP_DEV_GOOGLE_MAPS_API_KEY
-          }`
-        )
-        .then(response => response.data.results[0])
-      return geocode
-    } catch (error) {
-      console.log('MyFancyComponent -> }catch -> error', error)
+    let groupedByLocation = removedUnknownLocations.reduce((acc, obj) => {
+      let key = obj.location.translations['sv-SE']
+      if (!acc[key]) {
+        acc[key] = []
+      }
+      acc[key].push(obj)
+      return acc
+    }, {})
+
+    for (const key in groupedByLocation) {
+      const locationInfo = await fetchLocation(key)
+
+      if (groupedByLocation.hasOwnProperty(key)) {
+        groupedByLocation[key].map(item => {
+          return (item.geocode = locationInfo)
+        })
+      }
     }
+
+    const markers = [].concat(...Object.values(groupedByLocation))
+    this.setState({ markers })
+
+    // const markers = await Promise.all(
+    //   removedUnknownLocations.map(async item => {
+    //     let geocode = await fetchLocation(item.location.translations['sv-SE'])
+    //     return { ...item, geocode }
+    //   })
+    // )
+    // this.setState({ markers })
+    // console.log('markers', markers)
   }
 
   handleMarkerClick = clickedMarker => {

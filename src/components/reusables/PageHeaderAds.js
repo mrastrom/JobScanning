@@ -111,7 +111,6 @@ const CustomLink = styled(Link)`
 const SearchTerm = styled.div`
   width: 10rem;
   padding: 0.5rem;
-  text-transform: capitalize;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
