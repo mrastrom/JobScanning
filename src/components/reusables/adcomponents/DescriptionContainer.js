@@ -13,7 +13,12 @@ const DescriptionContainer = ({ text, source }) => (
           <p>Välj vilken du vill gå till!</p>
           <div>
             {source.map((item, i) => (
-              <a key={i} href={item.source.url} target="_blank">
+              <a
+                key={i}
+                href={item.source.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {[item.source.site.name] in images ? (
                   <SourceLogo sourceLogo={images[item.source.site.name]} />
                 ) : (
@@ -24,7 +29,11 @@ const DescriptionContainer = ({ text, source }) => (
           </div>
         </MultipleLinks>
       ) : (
-        <StyledLink href={source[0].source.url} target="_blank">
+        <StyledLink
+          href={source[0].source.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Gå till annonsen
         </StyledLink>
       )}

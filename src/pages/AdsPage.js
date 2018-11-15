@@ -13,20 +13,14 @@ import {
   PageHeaderAds
 } from '../components'
 
-// Refactor later
 const DISPLAY_STATES = {
-  list: <AdsList redirectToAdPage={this.redirectToAdPage} />,
+  list: <AdsList />,
   map: <AdsMap />,
   overview: <AdsOverview />
 }
 
 class AdsPage extends Component {
   state = { activeItem: 'list' }
-
-  redirectToAdPage = id => {
-    console.log(id)
-    this.props.history.push(`/ads/${id}`)
-  }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
