@@ -4,14 +4,27 @@ import images from '../images'
 
 const getLogo = name => {
   if ([name] in images) {
-    return <StyledImage src={images[name]} alt={name} />
+    return <BrandImage src={images[name]} alt={name} />
   } else {
-    return <p>{name}</p>
+    return (
+      <BrandText>
+        <p>{name}</p>
+      </BrandText>
+    )
   }
 }
 
 export default getLogo
 
-const StyledImage = styled.img`
-  width: 100%;
+const BrandImage = styled.div`
+  height: 100%;
+  background: ${props => `url(${props.src})`};
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+`
+
+const BrandText = styled.div`
+  text-align: center;
+  line-height: 2.3rem;
 `

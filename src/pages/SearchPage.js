@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { searchAds } from '../actions/index'
 import styled from 'styled-components'
-import { Button, Checkbox, Dropdown, Form, Input } from 'semantic-ui-react'
+import { Button, Dropdown, Form, Input } from 'semantic-ui-react'
 import { BoldText, GridContainer, PageHeader } from '../components'
 import { countiesAndMunicipalities } from '../utils/searchOptions'
 import axios from 'axios'
@@ -111,10 +111,13 @@ class SearchPage extends Component {
             />
           </Form.Field>
 
-          <CustomCheckbox
-            onChange={this.getCurrentPosition}
-            label="Använd min nuvarande position"
-          />
+          <Checkbox>
+            Använd min nuvarande position
+            <div>
+              <input type="checkbox" onChange={this.getCurrentPosition} />
+              <span />
+            </div>
+          </Checkbox>
 
           <CustomButton
             type="submit"
@@ -139,6 +142,65 @@ export default connect(
   mapStateToProps,
   { searchAds }
 )(SearchPage)
+
+const Checkbox = styled.label`
+  &&& {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    div {
+      display: inherit;
+      position: relative;
+
+      input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+      }
+
+      span {
+        height: 30px;
+        width: 30px;
+        background-color: #fff;
+        border: 1px solid #d4d4d5;
+        position: relative;
+      }
+
+      input:checked ~ span {
+        /* background-color: #2196f3; */
+      }
+
+      span:after {
+        content: '';
+        display: none;
+        position: absolute;
+        left: 8px;
+      }
+
+      input:checked ~ span:after {
+        display: block;
+      }
+
+      span:after {
+        width: 12px;
+        height: 24px;
+        border: solid ${props => props.theme.secondary};
+        border-width: 0 6px 6px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+    }
+  }
+`
 
 const CustomForm = styled(Form)`
   &&& {
@@ -193,32 +255,6 @@ const CustomButton = styled(Button)`
       background: ${props => props.theme.brightestSecondary};
       box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.2) !important;
       opacity: 1 !important;
-    }
-  }
-`
-
-const CustomCheckbox = styled(Checkbox)`
-  &&& {
-    & label {
-      padding-left: 0;
-      line-height: 1.9em;
-    }
-
-    & label:before {
-      left: auto;
-      right: 0;
-      height: 30px;
-      width: 30px;
-    }
-
-    & label:after {
-      left: auto;
-      right: 13px;
-      font-size: 30px;
-    }
-
-    &.ui.checkbox input:checked ~ label:after {
-      color: ${props => props.theme.secondary};
     }
   }
 `

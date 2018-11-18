@@ -8,6 +8,7 @@ const Ellipse = ({
   left,
   bgcolor,
   boxshadow,
+  zIndex,
   children
 }) => (
   <StyledEllipse
@@ -17,6 +18,7 @@ const Ellipse = ({
     left={left}
     bgcolor={bgcolor}
     boxshadow={boxshadow}
+    zIndex={zIndex}
   >
     {children}
   </StyledEllipse>
@@ -31,7 +33,7 @@ const StyledEllipse = styled.div`
   position: absolute;
   top: ${props => props.top};
   left: ${props => props.left};
-  z-index: -1;
+  z-index: ${props => (props.zIndex ? props.zIndex : '-1')};
 
   background: ${props => props.bgcolor};
   box-shadow: ${props =>

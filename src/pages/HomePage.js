@@ -67,4 +67,8 @@ const Header = styled.header`
 
 const Logo = styled.img`
   width: 20%;
+
+  @media (min-width: 500px) {
+    width: auto;
+  }
 `

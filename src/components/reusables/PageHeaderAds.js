@@ -20,7 +20,7 @@ class PageHeaderAds extends Component {
 
         <Children>
           <SearchTerm>
-            {this.props.term.length > 0 ? this.props.term : 'Inga sökord'}
+            {this.props.term.length > 0 ? `#${this.props.term}` : 'Inga sökord'}
           </SearchTerm>
           <CustomLink to="/search">
             <CustomIcon name="search" size="large" />
@@ -109,7 +109,6 @@ const CustomLink = styled(Link)`
 `
 
 const SearchTerm = styled.div`
-  width: 10rem;
   padding: 0.5rem;
   overflow: hidden;
   white-space: nowrap;

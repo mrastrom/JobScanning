@@ -20,10 +20,11 @@ class AdsOverview extends Component {
 
     return _.map(ordered, key => (
       <ListItem key={key}>
-        <Brand>{getLogo(key)}</Brand>
+        {getLogo(key)}
         <Score>
           {scoreboard[key]}
           <p style={{ display: 'inline-block', fontSize: '1.375rem' }}>st</p>
+          <span />
         </Score>
       </ListItem>
     ))
@@ -67,13 +68,9 @@ export default connect(
 
 const ListItem = styled.li`
   display: grid;
-  grid-template-columns: 170px 1fr;
+  grid-template-columns: 150px 1fr;
   grid-column-gap: 30px;
   align-items: center;
-`
-
-const Brand = styled.div`
-  line-height: 2.3rem;
 `
 
 const Score = styled.span`
@@ -87,6 +84,23 @@ const Score = styled.span`
   align-items: center;
   border-radius: 50%;
   position: relative;
+
+  & span {
+    height: 18px;
+    width: 14rem;
+    position: absolute;
+    left: -10px;
+    z-index: -1;
+
+    &:before {
+      content: '';
+      height: 18px;
+      width: 14rem;
+      position: absolute;
+      right: 0;
+      z-index: -1;
+    }
+  }
 `
 
 const OrderedList = styled.ol`
@@ -100,7 +114,15 @@ const OrderedList = styled.ol`
     background: ${props => props.theme.primary};
   }
 
+  & :nth-child(3n + 1) span span {
+    background: ${props => props.theme.primary};
+  }
+
   & :nth-child(3n - 1) span {
+    background: ${props => props.theme.secondary};
+  }
+
+  & :nth-child(3n - 1) span span {
     background: ${props => props.theme.secondary};
   }
 
@@ -108,29 +130,69 @@ const OrderedList = styled.ol`
     background: ${props => props.theme.brightSecondary};
   }
 
-  & :nth-child(3n + 1) span:before {
-    /* content: '';
-    height: 18px;
-    width: 14rem;
-    position: absolute;
-    left: -10px; */
-    background: ${props => props.theme.primary};
-  }
-
-  & :nth-child(3n - 1) span:before {
-    background: ${props => props.theme.secondary};
-  }
-
-  & :nth-child(3n) span:before {
+  & :nth-child(3n) span span {
     background: ${props => props.theme.brightSecondary};
   }
 
-  & :nth-child(1n + 1) span:before {
+  & span:before {
     content: '';
-    height: 18px;
-    width: 5rem * 1n + 1;
-    position: absolute;
-    left: -10px;
-    z-index: -1;
+width: 0;
+height: 0;
+border-style: solid;
+border-width: 100px 0 100px 200px;
+border-color: transparent transparent transparent #007bff;
+  }
+
+  & :nth-child(3n + 1) span:before {
+    /* background: ${props => props.theme.primary}; */
+  }
+
+  & :nth-child(3n - 1) span:before {
+    /* background: ${props => props.theme.secondary}; */
+  }
+
+  & :nth-child(3n) span:before {
+    /* background: ${props => props.theme.brightSecondary}; */
   }
 `
+
+// const OrderedList = styled.ol`
+//   list-style: none;
+
+//   & li {
+//     margin-top: 1rem;
+//   }
+
+//   & :nth-child(3n + 1) span {
+//     background: ${props => props.theme.primary};
+//   }
+
+//   & :nth-child(3n - 1) span {
+//     background: ${props => props.theme.secondary};
+//   }
+
+//   & :nth-child(3n) span {
+//     background: ${props => props.theme.brightSecondary};
+//   }
+
+//   & span:before {
+//     content: '';
+//     height: 18px;
+//     width: 14rem;
+//     position: absolute;
+//     left: -10px;
+//     z-index: -1;
+//   }
+
+//   & :nth-child(3n + 1) span:before {
+//     background: ${props => props.theme.primary};
+//   }
+
+//   & :nth-child(3n - 1) span:before {
+//     background: ${props => props.theme.secondary};
+//   }
+
+//   & :nth-child(3n) span:before {
+//     background: ${props => props.theme.brightSecondary};
+//   }
+// `
