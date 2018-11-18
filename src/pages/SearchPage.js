@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { searchAds } from '../actions/index'
+import { searchAds } from '../redux/actions/index'
 import styled from 'styled-components'
 import { Button, Dropdown, Form, Input } from 'semantic-ui-react'
 import { BoldText, GridContainer, PageHeader } from '../components'

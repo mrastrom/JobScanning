@@ -2,21 +2,35 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { Icon } from 'semantic-ui-react'
 import theme from '../../styles/theme'
+import { Icon } from 'semantic-ui-react'
+import { Ellipse } from '../index'
+import jt_logowhite from '../../images/logo/1x/jt_logowhite.png'
 
 class PageHeaderAds extends Component {
   render() {
     return (
       <Header>
-        <DropShadow>
-          <EllipseBig>
-            <Link to="/">
-              <Logo alt="JT" src="/assets/images/jt.png" />
-            </Link>
-          </EllipseBig>
-        </DropShadow>
-        <EllipseSmall />
+        <Ellipse
+          height="195px"
+          width="165px"
+          top="-110px"
+          left="-50px"
+          bgcolor={theme.secondary}
+          boxshadow
+          zIndex="1"
+        />
+
+        <Ellipse
+          height="110px"
+          width="82px"
+          top="-50px"
+          left="71px"
+          bgcolor={theme.brightSecondary}
+        />
+        <Link to="/">
+          <Logo alt="JobTech" src={jt_logowhite} />
+        </Link>
 
         <Children>
           <SearchTerm>
@@ -54,38 +68,9 @@ const Header = styled.header`
 const Logo = styled.img`
   width: 50px;
   position: absolute;
-  top: 5px;
-  left: 3%;
+  top: 10px;
+  left: 10px;
   z-index: 1000;
-`
-
-/* These ellipses are made differently from each other and will be evaluating on mobile
-to see which one works best. Since not all CSS is supported on mobiles */
-const EllipseBig = styled.div`
-  height: 100%;
-  background: ${theme.secondary};
-  clip-path: ellipse(25% 140% at 8% -40%);
-`
-
-const EllipseSmall = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  z-index: -1;
-  background: ${theme.brightSecondary};
-  clip-path: ellipse(12% 70% at 29% -1%);
-`
-
-const DropShadow = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  height: 100%;
-  width: 100%;
-  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.8));
 `
 
 const Children = styled.div`

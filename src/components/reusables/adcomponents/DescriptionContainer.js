@@ -54,7 +54,6 @@ const DescriptionBox = styled.div`
   position: relative;
   background: ${props => props.theme.white};
   padding: 1rem;
-  }
 `
 
 const DescriptionText = styled.p`

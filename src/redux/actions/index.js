@@ -1,5 +1,5 @@
-import getJobList from '../api/getJobList'
-import processJobList from '../utils/processJobList'
+import getJobList from '../../api/getJobList'
+import processJobList from '../../utils/processJobList'
 
 export const SEARCH_TERM = 'SEARCH_TERM'
 export const SEARCH_LOCATION = 'SEARCH_LOCATION'

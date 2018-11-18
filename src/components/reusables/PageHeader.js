@@ -3,22 +3,20 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import theme from '../../styles/theme'
 import { Ellipse } from '../index'
+import jt_logowhite from '../../images/logo/1x/jt_logowhite.png'
 
 const PageHeader = ({ children }) => (
   <Header>
     <Ellipse
       height="195px"
       width="165px"
-      top="auto"
+      top="-110px"
       left="-50px"
       bgcolor={theme.secondary}
       boxshadow
       zIndex="1"
-    >
-      <Link to="/">
-        <Logo alt="JT" src="/assets/images/jt.png" />
-      </Link>
-    </Ellipse>
+    />
+
     <Ellipse
       height="110px"
       width="82px"
@@ -26,6 +24,9 @@ const PageHeader = ({ children }) => (
       left="71px"
       bgcolor={theme.brightSecondary}
     />
+    <Link to="/">
+      <Logo alt="JobTech" src={jt_logowhite} />
+    </Link>
 
     <Children>{children}</Children>
   </Header>
@@ -47,9 +48,8 @@ const Header = styled.header`
 const Logo = styled.img`
   width: 50px;
   position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 10px;
+  left: 10px;
   z-index: 1000;
 `
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchMoreAds } from '../actions/index'
+import { fetchMoreAds } from '../redux/actions/index'
 import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import distanceInWordsStrict from 'date-fns/distance_in_words_strict'

@@ -68,8 +68,8 @@ export default connect(
 
 const ListItem = styled.li`
   display: grid;
-  grid-template-columns: 150px 1fr;
-  grid-column-gap: 30px;
+  grid-template-columns: 125px 1fr;
+  grid-column-gap: 25px;
   align-items: center;
 `
 
@@ -87,18 +87,20 @@ const Score = styled.span`
 
   & span {
     height: 18px;
-    width: 14rem;
+
     position: absolute;
     left: -10px;
     z-index: -1;
 
     &:before {
       content: '';
-      height: 18px;
-      width: 14rem;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 9px 0 9px 35px;
       position: absolute;
-      right: 0;
-      z-index: -1;
+      top: 0;
+      left: 100%;
     }
   }
 `
@@ -116,6 +118,11 @@ const OrderedList = styled.ol`
 
   & :nth-child(3n + 1) span span {
     background: ${props => props.theme.primary};
+
+    :before {
+      border-color: rgba(255, 255, 255, 0) rgba(255, 255, 255, 0)
+        rgba(255, 255, 255, 0) ${props => props.theme.primary};
+    }
   }
 
   & :nth-child(3n - 1) span {
@@ -124,6 +131,11 @@ const OrderedList = styled.ol`
 
   & :nth-child(3n - 1) span span {
     background: ${props => props.theme.secondary};
+
+    :before {
+      border-color: rgba(255, 255, 255, 0) rgba(255, 255, 255, 0)
+        rgba(255, 255, 255, 0) ${props => props.theme.secondary};
+    }
   }
 
   & :nth-child(3n) span {
@@ -132,67 +144,50 @@ const OrderedList = styled.ol`
 
   & :nth-child(3n) span span {
     background: ${props => props.theme.brightSecondary};
+
+    :before {
+      border-color: rgba(255, 255, 255, 0) rgba(255, 255, 255, 0)
+        rgba(255, 255, 255, 0) ${props => props.theme.brightSecondary};
+    }
   }
 
-  & span:before {
-    content: '';
-width: 0;
-height: 0;
-border-style: solid;
-border-width: 100px 0 100px 200px;
-border-color: transparent transparent transparent #007bff;
+  & :nth-child(1) span span {
+    width: 19rem;
   }
 
-  & :nth-child(3n + 1) span:before {
-    /* background: ${props => props.theme.primary}; */
+  & :nth-child(2) span span {
+    width: 18rem;
   }
 
-  & :nth-child(3n - 1) span:before {
-    /* background: ${props => props.theme.secondary}; */
+  & :nth-child(3) span span {
+    width: 17rem;
   }
 
-  & :nth-child(3n) span:before {
-    /* background: ${props => props.theme.brightSecondary}; */
+  & :nth-child(4) span span {
+    width: 16rem;
+  }
+
+  & :nth-child(5) span span {
+    width: 15rem;
+  }
+
+  & :nth-child(6) span span {
+    width: 14rem;
+  }
+
+  & :nth-child(7) span span {
+    width: 13rem;
+  }
+
+  & :nth-child(8) span span {
+    width: 12rem;
+  }
+
+  & :nth-child(9) span span {
+    width: 11rem;
+  }
+
+  & :nth-child(10) span span {
+    width: 10rem;
   }
 `
-
-// const OrderedList = styled.ol`
-//   list-style: none;
-
-//   & li {
-//     margin-top: 1rem;
-//   }
-
-//   & :nth-child(3n + 1) span {
-//     background: ${props => props.theme.primary};
-//   }
-
-//   & :nth-child(3n - 1) span {
-//     background: ${props => props.theme.secondary};
-//   }
-
-//   & :nth-child(3n) span {
-//     background: ${props => props.theme.brightSecondary};
-//   }
-
-//   & span:before {
-//     content: '';
-//     height: 18px;
-//     width: 14rem;
-//     position: absolute;
-//     left: -10px;
-//     z-index: -1;
-//   }
-
-//   & :nth-child(3n + 1) span:before {
-//     background: ${props => props.theme.primary};
-//   }
-
-//   & :nth-child(3n - 1) span:before {
-//     background: ${props => props.theme.secondary};
-//   }
-
-//   & :nth-child(3n) span:before {
-//     background: ${props => props.theme.brightSecondary};
-//   }
-// `
