@@ -5,7 +5,7 @@ import distanceInWordsStrict from 'date-fns/distance_in_words_strict'
 import format from 'date-fns/format'
 import sv from 'date-fns/locale/sv'
 import { Icon } from 'semantic-ui-react'
-import { LogoPlaceholder } from '../components'
+import { LogoPlaceholder } from '../../../components'
 
 const JobMapWindow = ({ marker, allMarkers, closeMapWindow, history }) => {
   console.log(allMarkers)

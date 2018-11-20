@@ -2,11 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import _ from 'lodash'
-import { CustomLoader, NoResultsBox } from '../components/'
-import getLogo from '../utils/getLogo'
+import { CustomLoader, NoResultsBox } from '../../../components'
+import getLogo from '../../../utils/getLogo'
 
 class AdsOverview extends Component {
   renderOverview = () => {
+    console.log(this.props.ads.hits)
+
     let scoreboard = this.props.ads.hits.reduce((acc, val) => {
       acc[val.source.site.name] = acc[val.source.site.name]
         ? acc[val.source.site.name] + 1
@@ -18,13 +20,23 @@ class AdsOverview extends Component {
       (a, b) => scoreboard[b] - scoreboard[a]
     )
 
+    ordered = ordered.length > 10 ? ordered.slice(0, 10) : ordered
+
     return _.map(ordered, key => (
       <ListItem key={key}>
         {getLogo(key)}
         <Score>
           {scoreboard[key]}
-          <p style={{ display: 'inline-block', fontSize: '1.375rem' }}>st</p>
-          <span />
+          <p
+            style={{
+              display: 'inline-block',
+              fontSize: '1.375rem',
+              margin: '0.7em 0 0 0'
+            }}
+          >
+            st
+          </p>
+          <span className="arrow" />
         </Score>
       </ListItem>
     ))
@@ -68,7 +80,8 @@ export default connect(
 
 const ListItem = styled.li`
   display: grid;
-  grid-template-columns: 125px 1fr;
+  grid-template-columns: 120px 1fr;
+
   grid-column-gap: 25px;
   align-items: center;
 `
@@ -85,7 +98,7 @@ const Score = styled.span`
   border-radius: 50%;
   position: relative;
 
-  & span {
+  & .arrow {
     height: 18px;
 
     position: absolute;
@@ -116,7 +129,7 @@ const OrderedList = styled.ol`
     background: ${props => props.theme.primary};
   }
 
-  & :nth-child(3n + 1) span span {
+  & :nth-child(3n + 1) span .arrow {
     background: ${props => props.theme.primary};
 
     :before {
@@ -129,7 +142,7 @@ const OrderedList = styled.ol`
     background: ${props => props.theme.secondary};
   }
 
-  & :nth-child(3n - 1) span span {
+  & :nth-child(3n - 1) span .arrow {
     background: ${props => props.theme.secondary};
 
     :before {
@@ -142,7 +155,7 @@ const OrderedList = styled.ol`
     background: ${props => props.theme.brightSecondary};
   }
 
-  & :nth-child(3n) span span {
+  & :nth-child(3n) span .arrow {
     background: ${props => props.theme.brightSecondary};
 
     :before {
@@ -151,43 +164,43 @@ const OrderedList = styled.ol`
     }
   }
 
-  & :nth-child(1) span span {
-    width: 19rem;
-  }
-
-  & :nth-child(2) span span {
+  & :nth-child(1) span .arrow {
     width: 18rem;
   }
 
-  & :nth-child(3) span span {
+  & :nth-child(2) span .arrow {
     width: 17rem;
   }
 
-  & :nth-child(4) span span {
+  & :nth-child(3) span .arrow {
     width: 16rem;
   }
 
-  & :nth-child(5) span span {
+  & :nth-child(4) span .arrow {
     width: 15rem;
   }
 
-  & :nth-child(6) span span {
+  & :nth-child(5) span .arrow {
     width: 14rem;
   }
 
-  & :nth-child(7) span span {
+  & :nth-child(6) span .arrow {
     width: 13rem;
   }
 
-  & :nth-child(8) span span {
+  & :nth-child(7) span .arrow {
     width: 12rem;
   }
 
-  & :nth-child(9) span span {
+  & :nth-child(8) span .arrow {
     width: 11rem;
   }
 
-  & :nth-child(10) span span {
+  & :nth-child(9) span .arrow {
     width: 10rem;
+  }
+
+  & :nth-child(10) span .arrow {
+    width: 9rem;
   }
 `

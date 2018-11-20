@@ -9,8 +9,8 @@ import {
   OverlayView
 } from 'react-google-maps'
 import MarkerClusterer from 'react-google-maps/lib/components/addons/MarkerClusterer'
-import { JobMapWindow } from './index'
-import fetchLocation from '../api/fetchLocation'
+import { JobMapWindow } from '../../../components'
+import fetchLocation from '../../../api/fetchLocation'
 
 const getPixelPositionOffset = (width, height) => ({
   x: -(width / 2),

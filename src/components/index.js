@@ -1,27 +1,27 @@
 import AdDetailsAuranest from './reusables/AdDetailsAuranest'
 import BoldText from './reusables/BoldText'
 import ButtonLink from './reusables/ButtonLink'
+import Checkbox from './reusables/Checkbox'
 import DisplayNumber from './reusables/DisplayNumber'
 import Ellipse from './reusables/Ellipse'
-import FlexContainer from './reusables/FlexContainer'
 import GridContainer from './reusables/GridContainer'
 import CustomLoader from './reusables/CustomLoader'
 import LogoPlaceholder from './reusables/LogoPlaceholder'
 import NoResultsBox from './reusables/NoResultsBox'
-import PageHeader from './reusables/PageHeader'
-import PageHeaderAds from './reusables/PageHeaderAds'
+import PageHeader from './PageHeader'
+import PageHeaderAds from '../pages/JobsPage/components/PageHeaderAds'
 
-import AdsList from '../containers/AdsList'
-import AdsMap from '../containers/AdsMap'
-import AdsOverview from '../containers/AdsOverview'
+import AdsList from '../pages/JobsPage/components/AdsList'
+import AdsMap from '../pages/JobsPage/components/AdsMap'
+import AdsOverview from '../pages/JobsPage/components/AdsOverview'
 
 import SubHeader from './reusables/adcomponents/SubHeader'
 import Title from './reusables/adcomponents/Title'
 import InfoContainer from './reusables/adcomponents/InfoContainer'
 import DescriptionContainer from './reusables/adcomponents/DescriptionContainer'
 
-import JobMap from './JobMap'
-import JobMapWindow from './JobMapWindow'
+import JobMap from '../pages/JobsPage/components/JobMap'
+import JobMapWindow from '../pages/JobsPage/components/JobMapWindow'
 
 export {
   AdDetailsAuranest,
@@ -30,9 +30,9 @@ export {
   AdsOverview,
   BoldText,
   ButtonLink,
+  Checkbox,
   DisplayNumber,
   Ellipse,
-  FlexContainer,
   GridContainer,
   CustomLoader,
   LogoPlaceholder,

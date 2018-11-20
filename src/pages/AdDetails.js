@@ -48,7 +48,7 @@ class AdDetails extends Component {
 
   render() {
     return (
-      <GridContainer rows={'13vh 1fr'}>
+      <GridContainer rows={'85px 1fr'}>
         <PageHeaderAds />
         {this.getAdDetails(this.props.match.params.id)}
       </GridContainer>

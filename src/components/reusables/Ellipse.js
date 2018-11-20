@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const Ellipse = ({
   height,
   width,
-  top,
+  bottom,
   left,
   bgcolor,
   boxshadow,
@@ -14,7 +14,7 @@ const Ellipse = ({
   <StyledEllipse
     height={height}
     width={width}
-    top={top}
+    bottom={bottom}
     left={left}
     bgcolor={bgcolor}
     boxshadow={boxshadow}
@@ -31,7 +31,7 @@ const StyledEllipse = styled.div`
   width: ${props => props.width};
 
   position: absolute;
-  top: ${props => props.top};
+  bottom: ${props => props.bottom};
   left: ${props => props.left};
   z-index: ${props => (props.zIndex ? props.zIndex : '-1')};
 

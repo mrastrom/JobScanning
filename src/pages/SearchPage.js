@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { searchAds } from '../redux/actions/index'
 import styled from 'styled-components'
 import { Button, Dropdown, Form, Input } from 'semantic-ui-react'
-import { BoldText, GridContainer, PageHeader } from '../components'
+import { BoldText, Checkbox, GridContainer, PageHeader } from '../components'
 import { countiesAndMunicipalities } from '../utils/searchOptions'
 import axios from 'axios'
 
@@ -74,7 +74,7 @@ class SearchPage extends Component {
 
   render() {
     return (
-      <GridContainer rows={'13% 6% 1fr'} gap={true} center={true}>
+      <GridContainer rows={'85px 6% 1fr'} gap={true} center={true}>
         <PageHeader>
           <h1>Alla jobb på ett ställe</h1>
         </PageHeader>
@@ -111,13 +111,10 @@ class SearchPage extends Component {
             />
           </Form.Field>
 
-          <Checkbox>
-            Använd min nuvarande position
-            <div>
-              <input type="checkbox" onChange={this.getCurrentPosition} />
-              <span />
-            </div>
-          </Checkbox>
+          <Checkbox
+            label="Använd min nuvarande position"
+            onChange={this.getCurrentPosition}
+          />
 
           <CustomButton
             type="submit"
@@ -142,65 +139,6 @@ export default connect(
   mapStateToProps,
   { searchAds }
 )(SearchPage)
-
-const Checkbox = styled.label`
-  &&& {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-
-    div {
-      display: inherit;
-      position: relative;
-
-      input {
-        position: absolute;
-        opacity: 0;
-        cursor: pointer;
-        height: 0;
-        width: 0;
-      }
-
-      span {
-        height: 30px;
-        width: 30px;
-        background-color: #fff;
-        border: 1px solid #d4d4d5;
-        position: relative;
-      }
-
-      input:checked ~ span {
-        /* background-color: #2196f3; */
-      }
-
-      span:after {
-        content: '';
-        display: none;
-        position: absolute;
-        left: 8px;
-      }
-
-      input:checked ~ span:after {
-        display: block;
-      }
-
-      span:after {
-        width: 12px;
-        height: 24px;
-        border: solid ${props => props.theme.secondary};
-        border-width: 0 6px 6px 0;
-        -webkit-transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
-        transform: rotate(45deg);
-      }
-    }
-  }
-`
 
 const CustomForm = styled(Form)`
   &&& {

@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import theme from '../../styles/theme'
+import theme from '../../../styles/theme'
 import { Icon } from 'semantic-ui-react'
-import { Ellipse } from '../index'
-import jt_logowhite from '../../images/logo/1x/jt_logowhite.png'
+import { Ellipse } from '../../../components'
+import jt_logowhite from '../../../images/logo/1x/jt_logowhite.png'
 
 class PageHeaderAds extends Component {
   render() {
@@ -14,7 +14,7 @@ class PageHeaderAds extends Component {
         <Ellipse
           height="195px"
           width="165px"
-          top="-110px"
+          bottom="0"
           left="-50px"
           bgcolor={theme.secondary}
           boxshadow
@@ -23,8 +23,8 @@ class PageHeaderAds extends Component {
 
         <Ellipse
           height="110px"
-          width="82px"
-          top="-50px"
+          width="85px"
+          bottom="30px"
           left="71px"
           bgcolor={theme.brightSecondary}
         />

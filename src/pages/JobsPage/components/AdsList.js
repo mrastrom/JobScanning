@@ -1,13 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchMoreAds } from '../redux/actions/index'
+import { fetchMoreAds } from '../../../redux/actions'
 import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import distanceInWordsStrict from 'date-fns/distance_in_words_strict'
 import format from 'date-fns/format'
 import sv from 'date-fns/locale/sv'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { CustomLoader, LogoPlaceholder, NoResultsBox } from '../components'
+import {
+  CustomLoader,
+  LogoPlaceholder,
+  NoResultsBox
+} from '../../../components'
 
 class AdsList extends Component {
   state = {
@@ -48,6 +52,7 @@ class AdsList extends Component {
             dataLength={this.props.ads.processedList.length}
             next={this.fetchMoreData}
             hasMore={true}
+            style={{ overflow: 'visible' }}
             loader={
               <div
                 style={{
