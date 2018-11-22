@@ -16,7 +16,10 @@ export const searchAds = (term, location) => async dispatch => {
   })
 
   const locationType = location.length > 2 ? 'kommun' : 'lan'
+
+  // HÄR SKER REQUESTET
   let { data } = await getJobList(term, locationType, location)
+
   const allSources = data.hits.map(item => item.source.site.name)
   const uniqueSources = [...new Set(allSources)].length
   const processedList = processJobList(data.hits)
