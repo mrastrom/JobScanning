@@ -69,9 +69,7 @@ const DescriptionText = styled.p`
 
 const StyledLink = styled.a`
   &:link,
-  &:visited,
-  &:hover,
-  &:active {
+  &:visited {
     color: #fff;
     font-size: 1.8rem;
     font-weight: 700;
@@ -84,6 +82,24 @@ const StyledLink = styled.a`
     padding: 1.5rem;
     background: ${props => props.theme.secondary};
     box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+    border-radius: 10rem;
+  }
+
+  &:hover,
+  &:active {
+    color: ${props => props.theme.secondary};
+    font-size: 1.8rem;
+    font-weight: 700;
+    position: absolute;
+    left: 50%;
+    bottom: 15%;
+    transform: translate(-50%, -15%);
+    text-align: center;
+    width: 60%;
+    padding: 1.5rem;
+    background: #fff;
+    box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+    border: 1px solid ${props => props.theme.secondary};
     border-radius: 10rem;
   }
 `

@@ -12,6 +12,7 @@ import {
   LogoPlaceholder,
   NoResultsBox
 } from '../../../components'
+import breakpoints from '../../../styles/breakpoints'
 
 class AdsList extends Component {
   state = {
@@ -25,7 +26,7 @@ class AdsList extends Component {
 
   fetchMoreData = () => {
     this.setState(prevState => ({
-      offset: prevState.offset + 100
+      offset: prevState.offset + 10
     }))
     console.log(this.state.offset)
 
@@ -41,8 +42,6 @@ class AdsList extends Component {
 
     if (this.props.ads.isFetching) {
       return <CustomLoader size="massive" content="Laddar" />
-    } else if (Object.keys(ads).length === 0 && ads.constructor === Object) {
-      return <NoResultsBox />
     } else if (this.props.ads.error) {
       return <NoResultsBox />
     } else {
@@ -67,7 +66,11 @@ class AdsList extends Component {
             {this.props.ads.processedList.map((item, i) => (
               <ListItem
                 key={i}
-                onClick={() => this.redirectToAdPage(item.group.id)}
+                onClick={
+                  this.props.showDetails
+                    ? () => this.props.showDetails(item)
+                    : () => this.redirectToAdPage(item.group.id)
+                }
               >
                 <LogoPlaceholder employer={item.employer} />
                 <ItemInfo>
@@ -121,6 +124,9 @@ export default withRouter(
 const List = styled.ul`
   display: grid;
   width: 100%;
+
+  @media only screen and (min-width: ${breakpoints.tablet}) {
+  }
 `
 
 const ListItem = styled.li`

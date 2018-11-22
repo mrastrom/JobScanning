@@ -14,7 +14,7 @@ class PageHeaderAds extends Component {
         <Ellipse
           height="195px"
           width="165px"
-          bottom="0"
+          bottom="5px"
           left="-50px"
           bgcolor={theme.secondary}
           boxshadow
@@ -24,7 +24,7 @@ class PageHeaderAds extends Component {
         <Ellipse
           height="110px"
           width="85px"
-          bottom="30px"
+          bottom="35px"
           left="71px"
           bgcolor={theme.brightSecondary}
         />
@@ -105,6 +105,7 @@ const SearchTerm = styled.div`
 
 const CustomIcon = styled(Icon)`
   &&& {
+    color: #fff;
     padding: 1.5rem 2.3rem;
     margin-left: 2rem;
     background: ${theme.secondary};

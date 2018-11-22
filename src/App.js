@@ -6,6 +6,8 @@ import HomePage from './pages/HomePage'
 import SearchPage from './pages/SearchPage'
 import AdDetails from './pages/AdDetails'
 import AdsPage from './pages/JobsPage/AdsPage'
+import breakpoints from './styles/breakpoints'
+import background from './images/bg.png'
 
 const GlobalStyle = createGlobalStyle`
   *,
@@ -26,6 +28,12 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Open Sans', sans-serif;
     font-size: 1.6rem !important;
     height: 100vh;
+
+    @media only screen and (min-width: ${breakpoints.tablet}) {
+    background: url(${background});
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    }
   }
 
   h1,

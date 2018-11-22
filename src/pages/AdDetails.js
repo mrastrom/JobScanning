@@ -20,6 +20,7 @@ class AdDetails extends Component {
     let duplicatedGroupId = _.filter(hits, item => {
       return item.group.id === groupId
     })
+
     console.log('TCL: duplicatedGroupId', duplicatedGroupId)
     if (!processedList) {
       return <NoResultsBox adDetails />

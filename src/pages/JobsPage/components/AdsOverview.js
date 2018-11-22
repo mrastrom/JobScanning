@@ -31,7 +31,7 @@ class AdsOverview extends Component {
             style={{
               display: 'inline-block',
               fontSize: '1.375rem',
-              margin: '0.7em 0 0 0'
+              margin: '6px 0 0 0'
             }}
           >
             st

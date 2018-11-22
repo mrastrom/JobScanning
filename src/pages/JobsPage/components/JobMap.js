@@ -78,43 +78,35 @@ class MyFancyComponent extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.ads.processedList) {
-      this.setupMarkers()
+    if (this.props.ads.markers) {
+      this.setState({ markers: this.props.ads.markers })
     }
   }
 
-  setupMarkers = async () => {
-    const { processedList } = this.props.ads
-    const removedUnknownLocations = processedList.filter(item => item.location)
+  // setupMarkers = async () => {
+  //   const { processedList } = this.props.ads
+  //   const removedUnknownLocations = processedList.filter(item => item.location)
 
-    const groupedByLocation = removedUnknownLocations.reduce((acc, obj) => {
-      const key = obj.location.translations['sv-SE']
-      if (!acc[key]) {
-        acc[key] = []
-      }
-      acc[key].push(obj)
-      return acc
-    }, {})
+  //   const groupedByLocation = removedUnknownLocations.reduce((acc, obj) => {
+  //     const key = obj.location.translations['sv-SE']
+  //     if (!acc[key]) {
+  //       acc[key] = []
+  //     }
+  //     acc[key].push(obj)
+  //     return acc
+  //   }, {})
 
-    for (const key in groupedByLocation) {
-      const locationInfo = await fetchLocation(key)
-      groupedByLocation[key].map(item => {
-        item.geocode = locationInfo
-        this.setState(prevState => ({
-          markers: [...prevState.markers, item]
-        }))
-        return item
-      })
-    }
-
-    // removedUnknownLocations.map(async item => {
-    //   let geocode = await fetchLocation(item.location.translations['sv-SE'])
-    //   item = { ...item, geocode }
-    //   this.setState(prevState => ({
-    //     markers: [...prevState.markers, item]
-    //   }))
-    // })
-  }
+  //   for (const key in groupedByLocation) {
+  //     const locationInfo = await fetchLocation(key)
+  //     groupedByLocation[key].map(item => {
+  //       item.geocode = locationInfo
+  //       this.setState(prevState => ({
+  //         markers: [...prevState.markers, item]
+  //       }))
+  //       return item
+  //     })
+  //   }
+  // }
 
   handleMarkerClick = clickedMarker => {
     console.log(clickedMarker)

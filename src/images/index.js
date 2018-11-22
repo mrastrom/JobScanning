@@ -16,6 +16,7 @@ import medrek from './sourceLogo/medrek_large.png'
 import metrojobb from './sourceLogo/metrojobb.png'
 import netJobs from './sourceLogo/netjobs.png'
 import offentligaJobb from './sourceLogo/offentliga_jobb.jpeg'
+import onePartnerGroup from './sourceLogo/opg.svg'
 import platsbanken from './sourceLogo/platsbanken_arbetsförmedlingen.png'
 import restorationHardware from './sourceLogo/restorationhardware.png'
 import resume from './sourceLogo/resume.jpeg'
@@ -49,6 +50,7 @@ export default {
   Metrojobb: metrojobb,
   NetJobs: netJobs,
   'Offentliga Jobb': offentligaJobb,
+  OnePartnerGroup: onePartnerGroup,
   Platsbanken: platsbanken,
   '===restorationhardware===': restorationHardware,
   Resumé: resume,

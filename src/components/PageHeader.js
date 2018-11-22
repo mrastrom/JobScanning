@@ -10,7 +10,7 @@ const PageHeader = ({ children }) => (
     <Ellipse
       height="195px"
       width="165px"
-      bottom="0"
+      bottom="5px"
       left="-50px"
       bgcolor={theme.secondary}
       boxshadow
@@ -20,7 +20,7 @@ const PageHeader = ({ children }) => (
     <Ellipse
       height="110px"
       width="85px"
-      bottom="30px"
+      bottom="35px"
       left="71px"
       bgcolor={theme.brightSecondary}
       zIndex="-2"

@@ -20,6 +20,7 @@ const StyledH3 = styled.h3`
   overflow: hidden;
   text-align: center;
   word-break: break-word;
+  hyphens: auto;
   background: ${props => props.theme.brightestSecondary};
   margin: 0 !important;
   padding: 1rem;

@@ -11,7 +11,7 @@ export default async (queryString, locationType, location, offset) => {
         q: queryString,
         [locationType]: location,
         offset: offset,
-        limit: 100,
+        limit: 10,
         'utan-erfarenhet': false,
         dataset: 'auranest'
       }

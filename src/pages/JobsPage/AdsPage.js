@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Menu } from 'semantic-ui-react'
 import styled from 'styled-components'
+import Responsive from 'react-responsive'
+import breakpoint from '../../styles/breakpoints'
 import theme from '../../styles/theme'
 import {
   AdsList,
@@ -11,6 +13,7 @@ import {
   GridContainer,
   PageHeaderAds
 } from '../../components'
+import JobsPageDesktop from './JobsPageDesktop'
 
 const DISPLAY_STATES = {
   list: <AdsList />,
@@ -29,54 +32,63 @@ class AdsPage extends Component {
     const activeComponent = DISPLAY_STATES[activeItem]
 
     return (
-      <GridContainer rows={'185px calc(100vh - 185px)'}>
-        <Header>
-          <PageHeaderAds />
+      <React.Fragment>
+        <Responsive maxWidth={breakpoint.tablet}>
+          <GridContainer rows={'185px calc(100vh - 185px)'}>
+            <Header>
+              <PageHeaderAds />
 
-          <p
-            style={{
-              fontSize: theme.fontSizeMedium,
-              margin: '0',
-              alignSelf: 'center',
-              textAlign: 'center',
-              padding: '1rem 0'
-            }}
-          >
-            <DisplayNumber>
-              {this.props.ads.total ? this.props.ads.total : 0}
-            </DisplayNumber>{' '}
-            jobbannonser från{' '}
-            <DisplayNumber>
-              {this.props.ads.uniqueSources ? this.props.ads.uniqueSources : 0}
-            </DisplayNumber>{' '}
-            rekryteringssajter
-          </p>
+              <p
+                style={{
+                  fontSize: theme.fontSizeMedium,
+                  margin: '0',
+                  alignSelf: 'center',
+                  textAlign: 'center',
+                  padding: '1rem 0'
+                }}
+              >
+                <DisplayNumber>
+                  {this.props.ads.total ? this.props.ads.total : 0}
+                </DisplayNumber>{' '}
+                jobbannonser från{' '}
+                <DisplayNumber>
+                  {this.props.ads.uniqueSources
+                    ? this.props.ads.uniqueSources
+                    : 0}
+                </DisplayNumber>{' '}
+                rekryteringssajter
+              </p>
 
-          <CustomMenu borderless fluid widths={3}>
-            <CustomMenuItem
-              name="list"
-              active={activeItem === 'list'}
-              content="Lista"
-              onClick={this.handleItemClick}
-            />
+              <CustomMenu borderless fluid widths={3}>
+                <CustomMenuItem
+                  name="list"
+                  active={activeItem === 'list'}
+                  content="Lista"
+                  onClick={this.handleItemClick}
+                />
 
-            <CustomMenuItem
-              name="map"
-              active={activeItem === 'map'}
-              content="Karta"
-              onClick={this.handleItemClick}
-            />
+                <CustomMenuItem
+                  name="map"
+                  active={activeItem === 'map'}
+                  content="Karta"
+                  onClick={this.handleItemClick}
+                />
 
-            <CustomMenuItem
-              name="overview"
-              active={activeItem === 'overview'}
-              content="Översikt"
-              onClick={this.handleItemClick}
-            />
-          </CustomMenu>
-        </Header>
-        <Content>{activeComponent}</Content>
-      </GridContainer>
+                <CustomMenuItem
+                  name="overview"
+                  active={activeItem === 'overview'}
+                  content="Översikt"
+                  onClick={this.handleItemClick}
+                />
+              </CustomMenu>
+            </Header>
+            <Content>{activeComponent}</Content>
+          </GridContainer>
+        </Responsive>
+        <Responsive minWidth={breakpoint.tablet}>
+          <JobsPageDesktop />
+        </Responsive>
+      </React.Fragment>
     )
   }
 }

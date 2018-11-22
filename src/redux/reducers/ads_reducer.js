@@ -1,6 +1,14 @@
 import { ADS_REQUEST, ADS_SUCCESS, ADS_FAILURE, ADS_ADD_MORE } from '../actions'
 
-export default (state = {}, action) => {
+const initialState = {
+  isFetching: false,
+  uniqueSources: 0,
+  hits: [],
+  processedList: [],
+  markers: []
+}
+
+export default (state = initialState, action) => {
   switch (action.type) {
     case ADS_REQUEST:
       return { ...state, isFetching: true }
@@ -16,7 +24,8 @@ export default (state = {}, action) => {
           processedList: [
             ...state.processedList,
             ...action.payload.processedList
-          ]
+          ],
+          markers: [...state.markers, ...action.payload.markers]
         }
       }
     default:

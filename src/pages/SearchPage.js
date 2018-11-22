@@ -99,7 +99,7 @@ class SearchPage extends Component {
           </Form.Field>
 
           <Form.Field required={true}>
-            <Dropdown
+            <StyledDropdown
               name="location"
               value={this.state.location}
               onChange={this.handleChange}
@@ -140,11 +140,17 @@ export default connect(
   { searchAds }
 )(SearchPage)
 
+const StyledDropdown = styled(Dropdown)`
+  & .visible {
+    min-height: 30vh;
+  }
+`
+
 const CustomForm = styled(Form)`
   &&& {
     display: flex;
     flex-direction: column;
-    height: 430px;
+    height: 350px;
     width: 88%;
     padding: 3rem 2rem;
     background: ${props => props.theme.primary};
@@ -168,7 +174,7 @@ const CustomForm = styled(Form)`
 const CustomButton = styled(Button)`
   &&& {
     align-self: center;
-    margin-top: 10rem;
+    margin-top: 4rem;
     font-family: 'Open Sans', sans-serif;
     font-size: 2rem;
     font-weight: 500;
