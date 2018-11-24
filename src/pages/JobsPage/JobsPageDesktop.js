@@ -7,7 +7,6 @@ import {
   AdsList,
   AdsMap,
   AdsOverview,
-  DisplayNumber,
   GridContainer,
   PageHeaderAds,
   DescriptionContainer
@@ -23,13 +22,13 @@ class AdsPage extends Component {
   selectAd = selectedAd => {
     console.log(selectedAd)
 
-    const adsWithSameGroupId = _.filter(this.props.ads.hits, item => {
+    const duplicatedGroupId = _.filter(this.props.ads.hits, item => {
       return item.group.id === selectedAd.group.id
     })
 
     this.setState({
       selected: true,
-      selectedAd: { ...selectedAd, adsWithSameGroupId }
+      selectedAd: { ...selectedAd, duplicatedGroupId }
     })
 
     console.log('STATE', this.state.selectedAd)
@@ -51,7 +50,10 @@ class AdsPage extends Component {
             {selected ? (
               <div>
                 <h3 style={{ fontSize: '2.4rem' }}>Annons</h3>
-                {selectedAd.content.text}
+                <DescriptionContainer
+                  text={selectedAd.content.text}
+                  source={selectedAd.duplicatedGroupId}
+                />
               </div>
             ) : null}
           </Text>
@@ -110,26 +112,3 @@ const Ranks = styled.div`
 const Map = styled.div`
   grid-area: map;
 `
-
-/*
-<p
-style={{
-  fontSize: theme.fontSizeMedium,
-  margin: '0',
-  alignSelf: 'center',
-  textAlign: 'center',
-  padding: '1rem 0'
-}}
->
-<DisplayNumber>
-  {this.props.ads.total ? this.props.ads.total : 0}
-</DisplayNumber>{' '}
-jobbannonser från{' '}
-<DisplayNumber>
-  {this.props.ads.uniqueSources
-    ? this.props.ads.uniqueSources
-    : 0}
-</DisplayNumber>{' '}
-rekryteringssajter
-</p>
-*/

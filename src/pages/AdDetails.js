@@ -2,10 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import {
-  AdDetailsAuranest,
-  GridContainer,
   NoResultsBox,
-  PageHeaderAds
+  PageHeaderAds,
+  GridContainer,
+  SubHeader,
+  Title,
+  InfoContainer,
+  DescriptionContainer
 } from '../components'
 
 class AdDetails extends Component {
@@ -14,14 +17,12 @@ class AdDetails extends Component {
   }
 
   getAdDetails = groupId => {
-    console.log(groupId)
     let { hits, processedList } = this.props.ads
 
     let duplicatedGroupId = _.filter(hits, item => {
       return item.group.id === groupId
     })
 
-    console.log('TCL: duplicatedGroupId', duplicatedGroupId)
     if (!processedList) {
       return <NoResultsBox adDetails />
     } else {
@@ -34,15 +35,26 @@ class AdDetails extends Component {
         header
       } = duplicatedGroupId[0]
       return (
-        <AdDetailsAuranest
-          application={application}
-          employer={employer}
-          location={location}
-          content={content}
-          source={source}
-          header={header}
-          duplicatedGroupId={duplicatedGroupId}
-        />
+        <GridContainer rows={'11vh auto auto auto'}>
+          <SubHeader
+            siteName={
+              duplicatedGroupId.length > 1 ? 'Se nedan' : source.site.name
+            }
+          />
+
+          <Title employer={employer} adHeader={header} />
+
+          <InfoContainer
+            location={location.translations['sv-SE']}
+            firstSeenAt={source.firstSeenAt}
+            deadline={application.deadline}
+          />
+
+          <DescriptionContainer
+            text={content.text}
+            source={duplicatedGroupId}
+          />
+        </GridContainer>
       )
     }
   }

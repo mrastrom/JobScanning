@@ -1,4 +1,3 @@
-import AdDetailsAuranest from './reusables/AdDetailsAuranest'
 import BoldText from './reusables/BoldText'
 import ButtonLink from './reusables/ButtonLink'
 import Checkbox from './reusables/Checkbox'
@@ -24,7 +23,6 @@ import JobMap from '../pages/JobsPage/components/JobMap'
 import JobMapWindow from '../pages/JobsPage/components/JobMapWindow'
 
 export {
-  AdDetailsAuranest,
   AdsList,
   AdsMap,
   AdsOverview,

@@ -97,13 +97,14 @@ const Score = styled.span`
   align-items: center;
   border-radius: 50%;
   position: relative;
+  z-index: 2;
 
   & .arrow {
     height: 18px;
 
     position: absolute;
     left: -10px;
-    z-index: -1;
+    z-index: 1;
 
     &:before {
       content: '';
