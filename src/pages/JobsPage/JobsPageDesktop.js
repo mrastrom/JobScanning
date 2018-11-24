@@ -9,42 +9,56 @@ import {
   AdsOverview,
   DisplayNumber,
   GridContainer,
-  PageHeaderAds
+  PageHeaderAds,
+  DescriptionContainer
 } from '../../components'
 import JobDetailsDesktop from './components/JobDetailsDesktop'
-import JobTextDesktop from './components/JobTextDesktop'
 
 class AdsPage extends Component {
   state = {
+    selected: false,
     selectedAd: {}
   }
 
-  showDetails = ad => {
-    console.log(ad)
-    this.setState({ selectedAd: ad })
-    console.log(this.state.selectedAd)
+  selectAd = selectedAd => {
+    console.log(selectedAd)
+
+    const adsWithSameGroupId = _.filter(this.props.ads.hits, item => {
+      return item.group.id === selectedAd.group.id
+    })
+
+    this.setState({
+      selected: true,
+      selectedAd: { ...selectedAd, adsWithSameGroupId }
+    })
+
+    console.log('STATE', this.state.selectedAd)
   }
 
   render() {
+    const { selected, selectedAd } = this.state
     return (
       <GridContainer rows={'100px calc(100vh - 100px)'} center>
         <PageHeaderAds />
         <Content>
           <List>
-            <AdsList showDetails={this.showDetails} />
+            <AdsList selectAd={this.selectAd} />
           </List>
           <Details>
-            <JobDetailsDesktop selectedAd={this.state.selectedAd} />
+            {selected ? <JobDetailsDesktop selectedAd={selectedAd} /> : null}
           </Details>
           <Text>
-            <JobTextDesktop selectedAd={this.state.selectedAd} />
+            {selected ? (
+              <div>
+                <h3 style={{ fontSize: '2.4rem' }}>Annons</h3>
+                {selectedAd.content.text}
+              </div>
+            ) : null}
           </Text>
           <Ranks>
             <AdsOverview />
           </Ranks>
-          <Map>
-            <AdsMap markers={this.props.markers} />
-          </Map>
+          <Map>{/* <AdsMap markers={this.props.markers} /> */}</Map>
         </Content>
       </GridContainer>
     )

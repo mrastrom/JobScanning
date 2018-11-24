@@ -29,10 +29,7 @@ const AdDetailsAuranest = ({
       deadline={application.deadline}
     />
 
-    <DescriptionContainer
-      text={content.text.substring(0, 700)}
-      source={duplicatedGroupId}
-    />
+    <DescriptionContainer text={content.text} source={duplicatedGroupId} />
   </GridContainer>
 )
 

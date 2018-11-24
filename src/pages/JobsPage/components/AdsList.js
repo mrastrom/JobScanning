@@ -67,8 +67,8 @@ class AdsList extends Component {
               <ListItem
                 key={i}
                 onClick={
-                  this.props.showDetails
-                    ? () => this.props.showDetails(item)
+                  this.props.selectAd
+                    ? () => this.props.selectAd(item)
                     : () => this.redirectToAdPage(item.group.id)
                 }
               >
@@ -124,9 +124,6 @@ export default withRouter(
 const List = styled.ul`
   display: grid;
   width: 100%;
-
-  @media only screen and (min-width: ${breakpoints.tablet}) {
-  }
 `
 
 const ListItem = styled.li`
