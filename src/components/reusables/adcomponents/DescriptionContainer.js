@@ -3,51 +3,43 @@ import styled from 'styled-components'
 import images from '../../../images/'
 
 const DescriptionContainer = ({ text, source }) => (
-  <StyledDiv>
-    <DescriptionBox>
-      <h3 style={{ fontSize: '2.4rem' }}>Annons</h3>
-      <DescriptionText>{text.substring(0, 700)}</DescriptionText>
-      {source.length > 1 ? (
-        <MultipleLinks>
-          <p>Vi hittade annonsen på {source.length} olika sajter</p>
-          <p>Välj vilken du vill gå till!</p>
-          <div>
-            {source.map((item, i) => (
-              <a
-                key={i}
-                href={item.source.url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {[item.source.site.name] in images ? (
-                  <SourceLogo sourceLogo={images[item.source.site.name]} />
-                ) : (
-                  <p>{item.source.site.name}</p>
-                )}
-              </a>
-            ))}
-          </div>
-        </MultipleLinks>
-      ) : (
-        <StyledLink
-          href={source[0].source.url}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Gå till annonsen
-        </StyledLink>
-      )}
-    </DescriptionBox>
-  </StyledDiv>
+  <DescriptionBox>
+    <h3 style={{ fontSize: '2.4rem' }}>Annons</h3>
+    <DescriptionText>{text.substring(0, 700)}</DescriptionText>
+    {source.length > 1 ? (
+      <MultipleLinks>
+        <p>Vi hittade annonsen på {source.length} olika sajter</p>
+        <p>Välj vilken du vill gå till!</p>
+        <div>
+          {source.map((item, i) => (
+            <a
+              key={i}
+              href={item.source.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {[item.source.site.name] in images ? (
+                <SourceLogo sourceLogo={images[item.source.site.name]} />
+              ) : (
+                <p>{item.source.site.name}</p>
+              )}
+            </a>
+          ))}
+        </div>
+      </MultipleLinks>
+    ) : (
+      <StyledLink
+        href={source[0].source.url}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Gå till annonsen
+      </StyledLink>
+    )}
+  </DescriptionBox>
 )
 
 export default DescriptionContainer
-
-const StyledDiv = styled.div`
-  background: ${props => props.theme.primary};
-  padding: 3rem 1rem;
-  box-shadow: 0 -0.3rem 0.5rem rgba(0, 0, 0, 0.5);
-`
 
 const DescriptionBox = styled.div`
   grid-row: 4 / 5;

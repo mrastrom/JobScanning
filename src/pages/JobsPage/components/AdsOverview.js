@@ -104,7 +104,7 @@ const Score = styled.span`
 
     position: absolute;
     left: -10px;
-    z-index: 1;
+    z-index: -1;
 
     &:before {
       content: '';

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
 import _ from 'lodash'
 import {
   NoResultsBox,
@@ -49,11 +50,12 @@ class AdDetails extends Component {
             firstSeenAt={source.firstSeenAt}
             deadline={application.deadline}
           />
-
-          <DescriptionContainer
-            text={content.text}
-            source={duplicatedGroupId}
-          />
+          <StyledDiv>
+            <DescriptionContainer
+              text={content.text}
+              source={duplicatedGroupId}
+            />
+          </StyledDiv>
         </GridContainer>
       )
     }
@@ -79,3 +81,9 @@ export default connect(
   mapStateToProps,
   null
 )(AdDetails)
+
+const StyledDiv = styled.div`
+  background: ${props => props.theme.primary};
+  padding: 3rem 1rem;
+  box-shadow: 0 -0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+`

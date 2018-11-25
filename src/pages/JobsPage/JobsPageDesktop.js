@@ -48,19 +48,18 @@ class AdsPage extends Component {
           </Details>
           <Text>
             {selected ? (
-              <div>
-                <h3 style={{ fontSize: '2.4rem' }}>Annons</h3>
-                <DescriptionContainer
-                  text={selectedAd.content.text}
-                  source={selectedAd.duplicatedGroupId}
-                />
-              </div>
+              <DescriptionContainer
+                text={selectedAd.content.text}
+                source={selectedAd.duplicatedGroupId}
+              />
             ) : null}
           </Text>
           <Ranks>
             <AdsOverview />
           </Ranks>
-          <Map>{/* <AdsMap markers={this.props.markers} /> */}</Map>
+          <Map>
+            <AdsMap markers={this.props.markers} />
+          </Map>
         </Content>
       </GridContainer>
     )
