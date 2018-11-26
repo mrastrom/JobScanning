@@ -1,25 +1,29 @@
 import React from 'react'
 import styled from 'styled-components'
-import images from '../../../images/'
 import _ from 'lodash'
-import { BoldText } from '../../../components'
-import logo from '../../../images/hm.png'
+import { BoldText, LogoPlaceholder } from '../../../../components'
 import format from 'date-fns/format'
 import sv from 'date-fns/locale/sv'
 
 const JobDetailsDesktop = ({ selectedAd }) => {
   const {
+    application: { deadline },
+    employer,
+    header,
     location,
-    source: { firstSeenAt },
-    application: { deadline }
+    source: { firstSeenAt }
   } = selectedAd
-  console.log('HÄR', location, firstSeenAt, deadline)
+  console.log('​JobDetailsDesktop -> selectedAd', selectedAd)
 
   return (
     <Grid>
       <Header>
-        <JobLogo style={{ height: '50px', width: 'auto' }} src={logo} />
-        <JobHeader>Ekonomiassistent</JobHeader>
+        <div>
+          <JobHeader>{header}</JobHeader>
+        </div>
+        <div>
+          <LogoPlaceholder employer={employer} padding={false} desktop={true} />
+        </div>
       </Header>
       <Content>
         <p>
@@ -47,35 +51,31 @@ export default JobDetailsDesktop
 const Grid = styled.div`
   height: 100%;
   display: grid;
-  grid-template-rows: 30% 1fr;
-  grid-template-columns: 1fr;
-  padding: 2rem 0 0 4rem;
+  grid-template-rows: minmax(30%, auto) 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-row-gap: 1em;
 `
 
 const Header = styled.div`
   grid-row: 1/2;
-  grid-column: 1/2;
+  grid-column: 1/3;
   align-items: center;
-  margin: 0;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto;
 `
 
 const Content = styled.div`
   grid-row: 2/3;
   grid-column: 1/2;
-  font-size: 1.4rem !important;
-  align-self: center;
-`
-
-const JobLogo = styled.img`
-  grid-column: 1/2;
-  width: 100%;
 `
 
 const JobHeader = styled.h2`
   display: inline-block;
   margin: 0;
-  padding-left: 1rem;
-  font-size: 16px;
+  font-size: 3.2rem;
   font-weight: normal;
 `
+
+// grid-row: 1/2;
+// grid-column: 2/3;
+// justify-self: center;

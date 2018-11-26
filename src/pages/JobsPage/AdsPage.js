@@ -13,7 +13,7 @@ import {
   GridContainer,
   PageHeaderAds
 } from '../../components'
-import JobsPageDesktop from './JobsPageDesktop'
+import JobsPageDesktop from './components/desktop/JobsPageDesktop'
 
 const DISPLAY_STATES = {
   list: <AdsList />,

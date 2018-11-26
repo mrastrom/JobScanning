@@ -31,7 +31,9 @@ const GlobalStyle = createGlobalStyle`
 
     @media only screen and (min-width: ${breakpoints.tablet}) {
     background: url(${background});
+    background-size: cover;
     background-repeat: no-repeat;
+    background-position: center;
     background-attachment: fixed;
     }
   }

@@ -4,9 +4,10 @@ import styled from 'styled-components'
 import _ from 'lodash'
 import { CustomLoader, NoResultsBox } from '../../../components'
 import getLogo from '../../../utils/getLogo'
+import numberOfUniqueSources from '../../../utils/numberOfUniqueSources'
 
 class AdsOverview extends Component {
-  renderOverview = () => {
+  getRanks = () => {
     console.log(this.props.ads.hits)
 
     let scoreboard = this.props.ads.hits.reduce((acc, val) => {
@@ -42,24 +43,33 @@ class AdsOverview extends Component {
     ))
   }
 
-  render() {
+  getNumberOfSources = () => {
     let { ads, term } = this.props
 
-    if (this.props.ads.isFetching) {
+    const number = numberOfUniqueSources(ads.hits)
+
+    return (
+      <p>
+        Top {number ? number : 0} rekryteringssajter för dig som letar efter
+        annonser för {term}{' '}
+      </p>
+    )
+  }
+
+  render() {
+    let { ads } = this.props
+
+    if (ads.isFetching) {
       return <CustomLoader size="massive" content="Laddar" />
     } else if (Object.keys(ads).length === 0 && ads.constructor === Object) {
       return <NoResultsBox />
-    } else if (this.props.ads.error) {
+    } else if (ads.error) {
       return <NoResultsBox />
     } else {
       return (
         <div style={{ padding: '1.5rem' }}>
-          <p>
-            Top{' '}
-            {this.props.ads.uniqueSources ? this.props.ads.uniqueSources : 0}{' '}
-            rekryteringssajter för dig som letar efter annonser för {term}
-          </p>
-          <OrderedList>{this.renderOverview()}</OrderedList>
+          {this.getNumberOfSources()}
+          <OrderedList>{this.getRanks()}</OrderedList>
         </div>
       )
     }

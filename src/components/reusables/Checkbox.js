@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import breakpoint from '../../styles/breakpoints'
 
 const Checkbox = ({ label, onChange }) => (
   <StyledCheckbox>
@@ -62,5 +63,9 @@ const Checkmark = styled.span`
     transform: rotate(45deg);
     position: absolute;
     left: 8px;
+  }
+
+  @media only screen and (min-width: ${breakpoint.tablet}) {
+    margin-left: 1rem;
   }
 `

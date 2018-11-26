@@ -39,73 +39,53 @@ const MyMapComponent = compose(
       gridSize={60}
       maxZoom={14}
     >
-      {props.markers.map(marker => {
-        const position = {
-          lat: marker.geocode.geometry.location.lat,
-          lng: marker.geocode.geometry.location.lng
-        }
-        return (
-          <Marker
-            key={marker.id}
-            position={position}
-            defaultAnimation={4}
-            onClick={() => props.onMarkerClick(marker)}
-          >
-            {marker.isOpen && (
-              <OverlayView
-                position={{ lat: position.lat, lng: position.lng }}
-                mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-                getPixelPositionOffset={getPixelPositionOffset}
+      {props.markers
+        ? props.markers.map(marker => {
+            const position = {
+              lat: marker.geocode.geometry.location.lat,
+              lng: marker.geocode.geometry.location.lng
+            }
+            return (
+              <Marker
+                key={marker.id}
+                position={position}
+                defaultAnimation={4}
+                onClick={() => props.onMarkerClick(marker)}
               >
-                <JobMapWindow
-                  marker={marker}
-                  allMarkers={props.markers}
-                  closeMapWindow={() => props.onMarkerClick(marker)}
-                />
-              </OverlayView>
-            )}
-          </Marker>
-        )
-      })}
+                {marker.isOpen && (
+                  <OverlayView
+                    position={{ lat: position.lat, lng: position.lng }}
+                    mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+                    getPixelPositionOffset={getPixelPositionOffset}
+                  >
+                    <JobMapWindow
+                      marker={marker}
+                      allMarkers={props.markers}
+                      closeMapWindow={() => props.onMarkerClick(marker)}
+                    />
+                  </OverlayView>
+                )}
+              </Marker>
+            )
+          })
+        : null}
     </MarkerClusterer>
   </GoogleMap>
 ))
 
 class MyFancyComponent extends React.Component {
   state = {
-    markers: []
+    markers: this.props.ads.markers
   }
 
-  componentDidMount() {
-    if (this.props.ads.markers) {
-      this.setState({ markers: this.props.ads.markers })
+  static getDerivedStateFromProps(props, state) {
+    if (props.ads.markers !== state.markers) {
+      return {
+        markers: props.ads.markers
+      }
     }
+    return null
   }
-
-  // setupMarkers = async () => {
-  //   const { processedList } = this.props.ads
-  //   const removedUnknownLocations = processedList.filter(item => item.location)
-
-  //   const groupedByLocation = removedUnknownLocations.reduce((acc, obj) => {
-  //     const key = obj.location.translations['sv-SE']
-  //     if (!acc[key]) {
-  //       acc[key] = []
-  //     }
-  //     acc[key].push(obj)
-  //     return acc
-  //   }, {})
-
-  //   for (const key in groupedByLocation) {
-  //     const locationInfo = await fetchLocation(key)
-  //     groupedByLocation[key].map(item => {
-  //       item.geocode = locationInfo
-  //       this.setState(prevState => ({
-  //         markers: [...prevState.markers, item]
-  //       }))
-  //       return item
-  //     })
-  //   }
-  // }
 
   handleMarkerClick = clickedMarker => {
     console.log(clickedMarker)

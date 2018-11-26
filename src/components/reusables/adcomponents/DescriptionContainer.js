@@ -5,7 +5,7 @@ import images from '../../../images/'
 const DescriptionContainer = ({ text, source }) => (
   <DescriptionBox>
     <h3 style={{ fontSize: '2.4rem' }}>Annons</h3>
-    <DescriptionText>{text.substring(0, 700)}</DescriptionText>
+    <DescriptionText>{text.substring(0, 1200)}</DescriptionText>
     {source.length > 1 ? (
       <MultipleLinks>
         <p>Vi hittade annonsen på {source.length} olika sajter</p>
@@ -52,7 +52,7 @@ const DescriptionText = styled.p`
   white-space: pre-line;
   background: -webkit-linear-gradient(
     #000 0%,
-    #eee 50%,
+    #eee 75%,
     rgba(255, 255, 255, 0)
   );
   -webkit-background-clip: text;
@@ -80,19 +80,8 @@ const StyledLink = styled.a`
   &:hover,
   &:active {
     color: ${props => props.theme.secondary};
-    font-size: 1.8rem;
-    font-weight: 700;
-    position: absolute;
-    left: 50%;
-    bottom: 15%;
-    transform: translate(-50%, -15%);
-    text-align: center;
-    width: 60%;
-    padding: 1.5rem;
     background: #fff;
-    box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
     border: 1px solid ${props => props.theme.secondary};
-    border-radius: 10rem;
   }
 `
 
@@ -101,14 +90,14 @@ const MultipleLinks = styled.div`
   left: 50%;
   bottom: 5%;
   transform: translate(-50%, -5%);
-  height: 50%;
-  width: 80%;
+  width: 90%;
   background: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+  padding: 1rem;
 `
 
 const SourceLogo = styled.div`

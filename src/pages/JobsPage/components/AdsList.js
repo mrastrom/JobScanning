@@ -12,7 +12,6 @@ import {
   LogoPlaceholder,
   NoResultsBox
 } from '../../../components'
-import breakpoints from '../../../styles/breakpoints'
 
 class AdsList extends Component {
   state = {
@@ -38,20 +37,20 @@ class AdsList extends Component {
   }
 
   render() {
-    let { ads } = this.props
-
     if (this.props.ads.isFetching) {
       return <CustomLoader size="massive" content="Laddar" />
     } else if (this.props.ads.error) {
       return <NoResultsBox />
     } else {
       return (
-        <List>
+        <List id="scrollableDiv">
           <InfiniteScroll
             dataLength={this.props.ads.processedList.length}
             next={this.fetchMoreData}
             hasMore={true}
             style={{ overflow: 'visible' }}
+            scrollableTarget="scrollableDiv"
+            scrollThreshold={0.9}
             loader={
               <div
                 style={{
@@ -122,8 +121,10 @@ export default withRouter(
 )
 
 const List = styled.ul`
-  display: grid;
+  height: 100%;
   width: 100%;
+  overflow: auto;
+  display: grid;
 `
 
 const ListItem = styled.li`
@@ -142,7 +143,6 @@ const ItemInfo = styled.div`
 
 const ItemTitle = styled.h2`
   font-size: ${props => props.theme.fontSizeMedium};
-  text-decoration: underline;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

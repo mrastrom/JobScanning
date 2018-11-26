@@ -8,8 +8,6 @@ import { Icon } from 'semantic-ui-react'
 import { LogoPlaceholder } from '../../../components'
 
 const JobMapWindow = ({ marker, allMarkers, closeMapWindow, history }) => {
-  console.log(allMarkers)
-
   return (
     <MapWindowContainer>
       {allMarkers.map((item, i) => {

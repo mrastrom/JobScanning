@@ -1,9 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const LogoPlaceholder = ({ employer, padding }) => {
+const LogoPlaceholder = ({ employer, padding, desktop }) => {
   if (employer.logoUrl) {
-    return <StyledImg src={employer.logoUrl} padding={padding} />
+    return (
+      <StyledImg src={employer.logoUrl} padding={padding} desktop={desktop} />
+    )
   } else {
     return <StyledH3>{employer.name}</StyledH3>
   }
@@ -12,7 +14,8 @@ const LogoPlaceholder = ({ employer, padding }) => {
 export default LogoPlaceholder
 
 const StyledImg = styled.img`
-  width: 100%;
+  height: ${props => (props.desktop ? '100%' : 'auto')};
+  width: ${props => (props.desktop ? 'auto' : '100%')};
   padding: ${props => (props.padding ? '0.5rem' : '0')};
 `
 

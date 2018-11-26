@@ -2,16 +2,15 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import _ from 'lodash'
-import theme from '../../styles/theme'
 import {
   AdsList,
   AdsMap,
   AdsOverview,
   GridContainer,
-  PageHeaderAds,
   DescriptionContainer
-} from '../../components'
-import JobDetailsDesktop from './components/JobDetailsDesktop'
+} from '../../../../components'
+import JobDetailsDesktop from './JobDetailsDesktop'
+import PageHeaderAds from './PageHeaderAds'
 
 class AdsPage extends Component {
   state = {
@@ -98,10 +97,12 @@ const List = styled.div`
 
 const Details = styled.div`
   grid-area: details;
+  padding: 2rem 4rem 0 4rem;
 `
 
 const Text = styled.div`
   grid-area: text;
+  padding: 2rem 4rem 0 4rem;
 `
 
 const Ranks = styled.div`

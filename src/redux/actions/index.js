@@ -1,6 +1,7 @@
 import getJobList from '../../api/getJobList'
 import processJobList from '../../utils/processJobList'
 import fetchLocation from '../../api/fetchLocation'
+import numberOfUniqueSources from '../../utils/numberOfUniqueSources'
 
 export const SEARCH_TERM = 'SEARCH_TERM'
 export const SEARCH_LOCATION = 'SEARCH_LOCATION'
@@ -10,20 +11,25 @@ export const ADS_FAILURE = 'ADS_FAILURE'
 export const ADS_ADD_MORE = 'ADS_ADD_MORE'
 
 export const searchAds = (term, location) => async dispatch => {
-  // dispatch that sets loading to true
+  // Dispatch that sets loading state to true
   dispatch({
     type: ADS_REQUEST
+  })
+
+  dispatch({
+    type: SEARCH_TERM,
+    payload: term
   })
 
   const locationType = location.length > 2 ? 'kommun' : 'lan'
 
   // HÄR SKER REQUESTET
   let { data } = await getJobList(term, locationType, location)
+  console.log(data.hits)
 
-  const allSources = data.hits.map(item => item.source.site.name)
-  const uniqueSources = [...new Set(allSources)].length
   const processedList = processJobList(data.hits)
-
+  console.log('​processedList', processedList)
+  const uniqueSources = numberOfUniqueSources(data.hits)
   const removedUnknownLocations = processedList.filter(item => item.location)
 
   const groupedByLocation = removedUnknownLocations.reduce((acc, obj) => {
@@ -48,11 +54,6 @@ export const searchAds = (term, location) => async dispatch => {
   data = { ...data, uniqueSources, processedList, markers }
 
   dispatch({
-    type: SEARCH_TERM,
-    payload: term
-  })
-
-  dispatch({
     type: SEARCH_LOCATION,
     payload: location
   })
@@ -74,7 +75,10 @@ export const searchAds = (term, location) => async dispatch => {
 export const fetchMoreAds = (term, location, offset) => async dispatch => {
   const locationType = location.length > 2 ? 'kommun' : 'lan'
   let { data } = await getJobList(term, locationType, location, offset)
+  console.log(data.hits)
+
   const processedList = processJobList(data.hits)
+  console.log('​processedList', processedList)
 
   const removedUnknownLocations = processedList.filter(item => item.location)
 

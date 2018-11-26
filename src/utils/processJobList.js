@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import fetchLocation from '../api/fetchLocation'
 
 export default list => {
   const removedPassedDeadlines = removePassedDeadlines(list)

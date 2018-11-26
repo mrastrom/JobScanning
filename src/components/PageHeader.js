@@ -41,7 +41,6 @@ const Header = styled.header`
   align-items: flex-end;
   height: 100%;
   width: 100%;
-  background: ${theme.white};
   position: relative;
   z-index: 1;
 `
