@@ -41,15 +41,23 @@ export const searchAds = (term, location) => async dispatch => {
     return acc
   }, {})
 
-  for (const key in groupedByLocation) {
-    const locationInfo = await fetchLocation(key)
-    groupedByLocation[key].map(item => {
-      item.geocode = locationInfo
-      return item
-    })
+  let markers = []
+  for (const city in groupedByLocation) {
+    try {
+      const geocode = await fetchLocation(city)
+      groupedByLocation[city].forEach(obj => {
+        markers = [
+          ...markers,
+          {
+            ...obj,
+            geocode
+          }
+        ]
+      })
+    } catch (error) {
+      console.log(error)
+    }
   }
-
-  const markers = [].concat(...Object.values(groupedByLocation))
 
   data = { ...data, uniqueSources, processedList, markers }
 
