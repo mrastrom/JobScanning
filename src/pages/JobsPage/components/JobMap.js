@@ -32,44 +32,45 @@ const MyMapComponent = compose(
     defaultZoom={4.8}
     defaultCenter={{ lat: 62.173276, lng: 14.942265 }}
   >
-    <MarkerClusterer
-      onClick={props.onMarkerClustererClick}
-      averageCenter
-      enableRetinaIcons
-      gridSize={60}
-      maxZoom={14}
-    >
-      {props.markers
-        ? props.markers.map(marker => {
-            const position = {
-              lat: marker.geocode.geometry.location.lat,
-              lng: marker.geocode.geometry.location.lng
-            }
-            return (
-              <Marker
-                key={marker.id}
-                position={position}
-                defaultAnimation={4}
-                onClick={() => props.onMarkerClick(marker)}
-              >
-                {marker.isOpen && (
-                  <OverlayView
-                    position={{ lat: position.lat, lng: position.lng }}
-                    mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-                    getPixelPositionOffset={getPixelPositionOffset}
-                  >
-                    <JobMapWindow
-                      marker={marker}
-                      allMarkers={props.markers}
-                      closeMapWindow={() => props.onMarkerClick(marker)}
-                    />
-                  </OverlayView>
-                )}
-              </Marker>
-            )
-          })
-        : null}
-    </MarkerClusterer>
+    {props.markers.length > 0 && (
+      <MarkerClusterer
+        onClick={props.onMarkerClustererClick}
+        averageCenter
+        enableRetinaIcons
+        gridSize={60}
+        maxZoom={14}
+      >
+        {console.log(props.markers)}
+        {props.markers.map(marker => {
+          const position = {
+            lat: marker.geocode.geometry.location.lat,
+            lng: marker.geocode.geometry.location.lng
+          }
+          return (
+            <Marker
+              key={marker.id}
+              position={position}
+              defaultAnimation={4}
+              onClick={() => props.onMarkerClick(marker)}
+            >
+              {marker.isOpen && (
+                <OverlayView
+                  position={{ lat: position.lat, lng: position.lng }}
+                  mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+                  getPixelPositionOffset={getPixelPositionOffset}
+                >
+                  <JobMapWindow
+                    marker={marker}
+                    allMarkers={props.markers}
+                    closeMapWindow={() => props.onMarkerClick(marker)}
+                  />
+                </OverlayView>
+              )}
+            </Marker>
+          )
+        })}
+      </MarkerClusterer>
+    )}
   </GoogleMap>
 ))
 

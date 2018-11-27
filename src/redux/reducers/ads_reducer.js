@@ -13,9 +13,9 @@ export default (state = initialState, action) => {
     case ADS_REQUEST:
       return { ...state, isFetching: true }
     case ADS_SUCCESS:
-      return { isFetching: false, ...action.payload }
+      return { ...state, isFetching: false, error: false, ...action.payload }
     case ADS_FAILURE:
-      return { isFetching: false, error: true }
+      return { ...state, isFetching: false, error: true }
     case ADS_ADD_MORE:
       return {
         ...state,

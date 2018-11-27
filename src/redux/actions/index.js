@@ -59,6 +59,10 @@ export const searchAds = (term, location) => async dispatch => {
     }
   }
 
+  // In case API key is missing, remove markers. This is to be sure that only
+  // valid markers are passed into the map component.
+  markers = markers.filter(marker => marker.geocode)
+
   data = { ...data, uniqueSources, processedList, markers }
 
   dispatch({
@@ -99,15 +103,28 @@ export const fetchMoreAds = (term, location, offset) => async dispatch => {
     return acc
   }, {})
 
-  for (const key in groupedByLocation) {
-    const locationInfo = await fetchLocation(key)
-    groupedByLocation[key].map(item => {
-      item.geocode = locationInfo
-      return item
-    })
+  let markers = []
+  for (const city in groupedByLocation) {
+    try {
+      const geocode = await fetchLocation(city)
+      groupedByLocation[city].forEach(obj => {
+        markers = [
+          ...markers,
+          {
+            ...obj,
+            geocode
+          }
+        ]
+      })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  const markers = [].concat(...Object.values(groupedByLocation))
+  // In case API key is missing, remove markers. This is to be sure that only
+  // valid markers are passed into the map component.
+  markers = markers.filter(marker => marker.geocode)
+
   data = { hits: data.hits, processedList, markers }
 
   if (data.hits.length > 0) {

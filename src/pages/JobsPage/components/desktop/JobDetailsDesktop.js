@@ -72,10 +72,6 @@ const Content = styled.div`
 const JobHeader = styled.h2`
   display: inline-block;
   margin: 0;
-  font-size: 3.2rem;
+  font-size: 2.6rem;
   font-weight: normal;
 `
-
-// grid-row: 1/2;
-// grid-column: 2/3;
-// justify-self: center;
