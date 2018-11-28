@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import _ from 'lodash'
 import { BoldText, LogoPlaceholder } from '../../../../components'
 import format from 'date-fns/format'
 import sv from 'date-fns/locale/sv'

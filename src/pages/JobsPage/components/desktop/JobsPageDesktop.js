@@ -79,7 +79,7 @@ export default connect(
 const Content = styled.div`
   width: 75%;
   display: grid;
-  grid-template-rows: 40% 60% 1fr;
+  grid-template-rows: minmax(40%, auto) minmax(40%, auto) 1fr;
   grid-template-columns: 2fr 3fr;
   grid-template-areas: 'list details' 'list text' 'ranks map';
   grid-gap: 7px;

@@ -1,7 +1,6 @@
-import getJobList from '../../api/getJobList'
+import fetchJobs from '../../api/fetchJobs'
 import processJobList from '../../utils/processJobList'
-import fetchLocation from '../../api/fetchLocation'
-import numberOfUniqueSources from '../../utils/numberOfUniqueSources'
+import createMarkers from '../../utils/createMarkers'
 
 export const SEARCH_TERM = 'SEARCH_TERM'
 export const SEARCH_LOCATION = 'SEARCH_LOCATION'
@@ -22,48 +21,14 @@ export const searchAds = (term, location) => async dispatch => {
   })
 
   const locationType = location.length > 2 ? 'kommun' : 'lan'
-
-  // HÄR SKER REQUESTET
-  let { data } = await getJobList(term, locationType, location)
-  console.log(data.hits)
+  let { data } = await fetchJobs(term, locationType, location)
 
   const processedList = processJobList(data.hits)
-  console.log('​processedList', processedList)
-  const uniqueSources = numberOfUniqueSources(data.hits)
   const removedUnknownLocations = processedList.filter(item => item.location)
 
-  const groupedByLocation = removedUnknownLocations.reduce((acc, obj) => {
-    const key = obj.location.translations['sv-SE']
-    if (!acc[key]) {
-      acc[key] = []
-    }
-    acc[key].push(obj)
-    return acc
-  }, {})
+  const markers = await createMarkers(removedUnknownLocations)
 
-  let markers = []
-  for (const city in groupedByLocation) {
-    try {
-      const geocode = await fetchLocation(city)
-      groupedByLocation[city].forEach(obj => {
-        markers = [
-          ...markers,
-          {
-            ...obj,
-            geocode
-          }
-        ]
-      })
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  // In case API key is missing, remove markers. This is to be sure that only
-  // valid markers are passed into the map component.
-  markers = markers.filter(marker => marker.geocode)
-
-  data = { ...data, uniqueSources, processedList, markers }
+  data = { ...data, processedList, markers }
 
   dispatch({
     type: SEARCH_LOCATION,
@@ -86,44 +51,12 @@ export const searchAds = (term, location) => async dispatch => {
 
 export const fetchMoreAds = (term, location, offset) => async dispatch => {
   const locationType = location.length > 2 ? 'kommun' : 'lan'
-  let { data } = await getJobList(term, locationType, location, offset)
-  console.log(data.hits)
+  let { data } = await fetchJobs(term, locationType, location, offset)
 
   const processedList = processJobList(data.hits)
-  console.log('​processedList', processedList)
-
   const removedUnknownLocations = processedList.filter(item => item.location)
 
-  const groupedByLocation = removedUnknownLocations.reduce((acc, obj) => {
-    const key = obj.location.translations['sv-SE']
-    if (!acc[key]) {
-      acc[key] = []
-    }
-    acc[key].push(obj)
-    return acc
-  }, {})
-
-  let markers = []
-  for (const city in groupedByLocation) {
-    try {
-      const geocode = await fetchLocation(city)
-      groupedByLocation[city].forEach(obj => {
-        markers = [
-          ...markers,
-          {
-            ...obj,
-            geocode
-          }
-        ]
-      })
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  // In case API key is missing, remove markers. This is to be sure that only
-  // valid markers are passed into the map component.
-  markers = markers.filter(marker => marker.geocode)
+  const markers = await createMarkers(removedUnknownLocations)
 
   data = { hits: data.hits, processedList, markers }
 

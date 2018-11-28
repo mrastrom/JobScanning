@@ -2,7 +2,6 @@ import { ADS_REQUEST, ADS_SUCCESS, ADS_FAILURE, ADS_ADD_MORE } from '../actions'
 
 const initialState = {
   isFetching: false,
-  uniqueSources: 0,
   hits: [],
   processedList: [],
   markers: []

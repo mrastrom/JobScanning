@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import Responsive from 'react-responsive'
 import breakpoint from '../../styles/breakpoints'
 import theme from '../../styles/theme'
+import numberOfUniqueSources from '../../utils/numberOfUniqueSources'
 import {
   AdsList,
   AdsMap,
@@ -25,6 +26,14 @@ class AdsPage extends Component {
   state = { activeItem: 'list' }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
+  getNumberOfSources = () => {
+    let { ads } = this.props
+
+    const number = numberOfUniqueSources(ads.hits)
+
+    return number
+  }
 
   render() {
     const { activeItem } = this.state
@@ -51,11 +60,7 @@ class AdsPage extends Component {
                   {this.props.ads.total ? this.props.ads.total : 0}
                 </DisplayNumber>{' '}
                 jobbannonser från{' '}
-                <DisplayNumber>
-                  {this.props.ads.uniqueSources
-                    ? this.props.ads.uniqueSources
-                    : 0}
-                </DisplayNumber>{' '}
+                <DisplayNumber>{this.getNumberOfSources()}</DisplayNumber>{' '}
                 rekryteringssajter
               </p>
 
