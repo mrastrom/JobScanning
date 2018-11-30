@@ -157,6 +157,7 @@ const CustomForm = styled(Form)`
     box-shadow: ${props =>
       props.desktop ? 'none' : '0 0.3rem 0.5rem rgba(0, 0, 0, 0.5)'};
     border-radius: 5px;
+    z-index: 1;
 
     &&& * {
       font-size: 16px;
@@ -166,7 +167,7 @@ const CustomForm = styled(Form)`
       margin-top: 1rem;
     }
 
-    @media only screen and (min-width: ${breakpoint.tablet}) {
+    @media (min-width: ${breakpoint.tablet}) {
       flex-direction: row;
       justify-content: center;
       height: min-content;
@@ -181,19 +182,18 @@ const CustomForm = styled(Form)`
 
 const CustomButton = styled(Button)`
   &&& {
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 700;
     align-self: center;
     margin-top: 4rem;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 2rem;
-    font-weight: 500;
     text-align: center;
     padding: 1.4rem 9rem;
-    color: black;
     background: ${props => props.theme.secondary};
     box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.2);
     border-radius: 10rem;
 
-    @media only screen and (min-width: ${breakpoint.tablet}) {
+    @media (min-width: ${breakpoint.tablet}) {
       margin-top: 0;
     }
 

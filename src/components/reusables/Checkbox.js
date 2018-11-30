@@ -65,7 +65,7 @@ const Checkmark = styled.span`
     left: 8px;
   }
 
-  @media only screen and (min-width: ${breakpoint.tablet}) {
+  @media (min-width: ${breakpoint.tablet}) {
     margin-left: 1rem;
   }
 `

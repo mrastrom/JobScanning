@@ -20,7 +20,7 @@ const JobDetailsDesktop = ({ selectedAd }) => {
         <div>
           <JobHeader>{header}</JobHeader>
         </div>
-        <div>
+        <div style={{ justifySelf: 'end' }}>
           <LogoPlaceholder employer={employer} padding={false} desktop={true} />
         </div>
       </Header>
@@ -73,4 +73,6 @@ const JobHeader = styled.h2`
   margin: 0;
   font-size: 2.6rem;
   font-weight: normal;
+  word-break: break-word;
+  hyphens: auto;
 `

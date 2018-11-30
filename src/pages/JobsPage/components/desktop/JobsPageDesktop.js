@@ -43,7 +43,11 @@ class AdsPage extends Component {
             <AdsList selectAd={this.selectAd} />
           </List>
           <Details>
-            {selected ? <JobDetailsDesktop selectedAd={selectedAd} /> : null}
+            {selected ? (
+              <JobDetailsDesktop selectedAd={selectedAd} />
+            ) : (
+              <div style={{ height: '40vh' }} />
+            )}
           </Details>
           <Text>
             {selected ? (
@@ -51,7 +55,9 @@ class AdsPage extends Component {
                 text={selectedAd.content.text}
                 source={selectedAd.duplicatedGroupId}
               />
-            ) : null}
+            ) : (
+              <div style={{ height: '40vh' }} />
+            )}
           </Text>
           <Ranks>
             <AdsOverview />
@@ -79,7 +85,7 @@ export default connect(
 const Content = styled.div`
   width: 75%;
   display: grid;
-  grid-template-rows: minmax(40%, auto) minmax(40%, auto) 1fr;
+  grid-template-rows: auto auto auto;
   grid-template-columns: 2fr 3fr;
   grid-template-areas: 'list details' 'list text' 'ranks map';
   grid-gap: 7px;
@@ -97,12 +103,12 @@ const List = styled.div`
 
 const Details = styled.div`
   grid-area: details;
-  padding: 2rem 4rem 0 4rem;
+  padding: 2rem 4rem 1rem 4rem;
 `
 
 const Text = styled.div`
   grid-area: text;
-  padding: 2rem 4rem 0 4rem;
+  padding: 2rem 4rem 1rem 4rem;
 `
 
 const Ranks = styled.div`

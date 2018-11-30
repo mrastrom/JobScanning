@@ -17,20 +17,3 @@ ReactDOM.render(
   document.getElementById('root')
 )
 registerServiceWorker()
-
-/* In case redux-persist will be needed for more functionality */
-
-// import { PersistGate } from 'redux-persist/integration/react'
-// import { store, persistor } from './store/index'
-
-// ReactDOM.render(
-//   <Provider store={store}>
-//     <PersistGate loading={null} persistor={persistor}>
-//       <Router>
-//         <Route path="/" component={App} />
-//       </Router>
-//     </PersistGate>
-//   </Provider>,
-//   document.getElementById('root')
-// )
-// registerServiceWorker()

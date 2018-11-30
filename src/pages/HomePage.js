@@ -3,9 +3,11 @@ import styled from 'styled-components'
 import CountUp from 'react-countup'
 import theme from '../styles/theme'
 import homePageBackground from '../images/background.png'
+import jt_logowhite from '../images/logo/2x/jt_logowhite@2x.png'
 
 import { ButtonLink, DisplayNumber } from '../components'
 import { diagonalSlide } from '../styles/animations/diagonalSlide'
+import breakpoint from '../styles/breakpoints'
 
 export default () => {
   return (
@@ -13,22 +15,25 @@ export default () => {
       <Background />
       <Header>
         <h1>Alla jobb på ett ställe</h1>
-        <Logo alt="JT" src="/assets/images/jt.png" />
-        <p>
-          <DisplayNumber>
-            <CountUp start={15000} end={294293} duration={8} separator=" " />
-          </DisplayNumber>{' '}
-          jobbannonser från
-        </p>
-        <p>
-          <DisplayNumber>
-            <CountUp start={0} end={1009} duration={10} separator=" " />
-          </DisplayNumber>{' '}
-          rekryteringssajter
-        </p>
+        <Logo alt="JT" src={jt_logowhite} />
+        <FlexContainer>
+          <p>
+            <DisplayNumber>
+              <CountUp start={15000} end={294293} duration={8} separator=" " />
+            </DisplayNumber>{' '}
+            jobbannonser från
+          </p>
+          <p>
+            <DisplayNumber>
+              <CountUp start={0} end={1009} duration={10} separator=" " />
+            </DisplayNumber>{' '}
+            rekryteringssajter
+          </p>
+        </FlexContainer>
         <ButtonLink
           path={'/search'}
           label={'Gå vidare'}
+          margin={'2rem 0 1rem 0'}
           bgcolor={theme.primary}
         />
       </Header>
@@ -54,11 +59,13 @@ const Header = styled.header`
   justify-content: space-between;
   align-items: center;
   min-height: 55vh;
+  text-align: center;
   padding: 2.5rem 0 4rem;
   background: ${props => props.theme.secondary};
   border-bottom-left-radius: 90% 80%;
   border-bottom-right-radius: 90% 80%;
   box-shadow: 0 0.3rem 2rem 0.3rem rgba(0, 0, 0, 0.6);
+
   position: absolute;
   top: 0;
   left: 0;
@@ -66,9 +73,13 @@ const Header = styled.header`
 `
 
 const Logo = styled.img`
-  width: 20%;
+  height: 20vh;
+  width: auto;
+  margin: 1rem 0 3rem 0;
+`
 
-  @media (min-width: 500px) {
-    width: auto;
-  }
+const FlexContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `

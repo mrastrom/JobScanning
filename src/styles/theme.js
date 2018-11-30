@@ -8,6 +8,8 @@ export default {
   darkGrey: '#4A4A4A',
   black: '#000',
 
+  fontFamily: "'Open Sans', sans-serif",
+
   fontSizeSmall: '1.375rem',
   fontSizeMedium: '1.625rem',
   fontSizeLarge: '2.3rem'

@@ -63,7 +63,7 @@ const StyledLink = styled.a`
   &:link,
   &:visited {
     color: #fff;
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 700;
     position: absolute;
     left: 50%;
@@ -73,7 +73,8 @@ const StyledLink = styled.a`
     width: 60%;
     padding: 1.5rem;
     background: ${props => props.theme.secondary};
-    box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
+    /* box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5); */
+    box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.2);
     border-radius: 10rem;
   }
 
@@ -82,6 +83,7 @@ const StyledLink = styled.a`
     color: ${props => props.theme.secondary};
     background: #fff;
     border: 1px solid ${props => props.theme.secondary};
+    box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
   }
 `
 

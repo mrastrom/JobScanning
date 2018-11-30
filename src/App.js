@@ -29,7 +29,7 @@ const GlobalStyle = createGlobalStyle`
     font-size: 1.6rem !important;
     height: 100vh;
 
-    @media only screen and (min-width: ${breakpoints.tablet}) {
+    @media (min-width: ${breakpoints.tablet}) {
     background: url(${background});
     background-size: cover;
     background-repeat: no-repeat;
@@ -46,7 +46,11 @@ const GlobalStyle = createGlobalStyle`
 
   h1 {
     font-weight: bold;
-    font-size: 2rem;
+    font-size: 2em;
+
+    @media (min-width: ${breakpoints.tablet}) {
+    font-size: 2.5em;
+    }
   }
 
   h2 {
