@@ -1,22 +1,25 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { searchAds } from '../../redux/actions/index'
+import { searchAds } from '../redux/actions/index'
 import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import { Button, Dropdown, Form, Input } from 'semantic-ui-react'
-import { Checkbox } from '../../components'
-import { countiesAndMunicipalities } from '../../utils/searchOptions'
+import { Checkbox } from '../components'
+import { countiesAndMunicipalities } from '../utils/searchOptions'
 import axios from 'axios'
-import breakpoint from '../../styles/breakpoints'
+import breakpoint from '../styles/breakpoints'
 
 class SearchForm extends Component {
   state = {
-    term: this.props.term,
+    searchTerm: this.props.searchTerm,
     location: ''
   }
 
   componentDidMount() {
-    this.setState({ term: this.props.term, location: this.props.location })
+    this.setState({
+      searchTerm: this.props.searchTerm,
+      location: this.props.location
+    })
   }
 
   handleChange = (event, data) => {
@@ -25,7 +28,7 @@ class SearchForm extends Component {
 
   handleSubmit = async event => {
     event.preventDefault()
-    this.props.searchAds(this.state.term, this.state.location)
+    this.props.searchAds(this.state.searchTerm, this.state.location)
     this.props.history.push('/ads')
   }
 
@@ -82,8 +85,8 @@ class SearchForm extends Component {
       >
         <Form.Field required={true}>
           <Input
-            name="term"
-            value={this.state.term}
+            name="searchTerm"
+            value={this.state.searchTerm}
             onChange={this.handleChange}
             size="big"
             icon="search"
@@ -93,8 +96,8 @@ class SearchForm extends Component {
           />
         </Form.Field>
 
-        <div>
-          <Form.Field required={true}>
+        <div style={{ overflow: 'visible' }}>
+          <Form.Field>
             <StyledDropdown
               name="location"
               value={this.state.location}
@@ -103,7 +106,7 @@ class SearchForm extends Component {
               search
               selection
               options={countiesAndMunicipalities}
-              upward
+              upward={this.props.upward}
             />
           </Form.Field>
 
@@ -116,7 +119,7 @@ class SearchForm extends Component {
         <div style={{ textAlign: 'center' }}>
           <CustomButton
             type="submit"
-            disabled={this.state.term.length > 0 ? false : true}
+            disabled={this.state.searchTerm.length > 0 ? false : true}
           >
             Sök
           </CustomButton>
@@ -126,10 +129,12 @@ class SearchForm extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps({ ads }) {
+  const { searchTerm, location } = ads
+
   return {
-    term: state.term,
-    location: state.location
+    searchTerm,
+    location
   }
 }
 
@@ -157,7 +162,8 @@ const CustomForm = styled(Form)`
     box-shadow: ${props =>
       props.desktop ? 'none' : '0 0.3rem 0.5rem rgba(0, 0, 0, 0.5)'};
     border-radius: 5px;
-    z-index: 1;
+    z-index: 1000;
+    overflow: visible;
 
     &&& * {
       font-size: 16px;

@@ -5,7 +5,7 @@ import images from '../../../images/'
 const DescriptionContainer = ({ text, source }) => (
   <DescriptionBox>
     <h3 style={{ fontSize: '2.4rem' }}>Annons</h3>
-    <DescriptionText>{text.substring(0, 1200)}</DescriptionText>
+    {text && <DescriptionText>{text.substring(0, 1200)}</DescriptionText>}
     {source.length > 1 ? (
       <MultipleLinks>
         <p>Vi hittade annonsen på {source.length} olika sajter</p>

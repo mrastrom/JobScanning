@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import theme from '../../../../styles/theme'
 import { Ellipse } from '../../../../components'
 import jt_logowhite from '../../../../images/logo/1x/jt_logowhite.png'
-import SearchForm from '../../../../components/reusables/SearchForm'
+import SearchForm from '../../../../containers/SearchForm'
 
 class PageHeaderAds extends Component {
   render() {
@@ -34,23 +33,14 @@ class PageHeaderAds extends Component {
         </Link>
 
         <Children>
-          <SearchForm desktop={true} />
+          <SearchForm desktop={true} upward={false} />
         </Children>
       </Header>
     )
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    term: state.term
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  null
-)(PageHeaderAds)
+export default PageHeaderAds
 
 const Header = styled.header`
   height: 100%;

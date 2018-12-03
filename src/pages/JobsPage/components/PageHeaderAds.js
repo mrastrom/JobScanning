@@ -34,7 +34,9 @@ class PageHeaderAds extends Component {
 
         <Children>
           <SearchTerm>
-            {this.props.term.length > 0 ? `#${this.props.term}` : 'Inga sökord'}
+            {this.props.searchTerm
+              ? `#${this.props.searchTerm}`
+              : 'Inga sökord'}
           </SearchTerm>
           <CustomLink to="/search">
             <CustomIcon name="search" size="large" />
@@ -45,9 +47,10 @@ class PageHeaderAds extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps({ ads }) {
+  const { searchTerm } = ads
   return {
-    term: state.term
+    searchTerm
   }
 }
 

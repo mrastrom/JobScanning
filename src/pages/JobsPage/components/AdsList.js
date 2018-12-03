@@ -30,7 +30,7 @@ class AdsList extends Component {
     console.log(this.state.offset)
 
     this.props.fetchMoreAds(
-      this.props.term,
+      this.props.searchTerm,
       this.props.location,
       this.state.offset
     )
@@ -83,7 +83,7 @@ class AdsList extends Component {
                     Inlagd:{' '}
                     {format(item.source.firstSeenAt, 'YYYY-MM-DD HH:mm')}
                   </p>
-                  <ItemDeadline>
+                  {/* <ItemDeadline>
                     {item.application.deadline
                       ? distanceInWordsStrict(
                           Date.now(),
@@ -94,7 +94,7 @@ class AdsList extends Component {
                           }
                         )
                       : 'Se annonsen för datum'}
-                  </ItemDeadline>
+                  </ItemDeadline> */}
                 </ItemInfo>
               </ListItem>
             ))}
@@ -105,10 +105,11 @@ class AdsList extends Component {
   }
 }
 
-function mapStateToProps({ ads, term, location }) {
+function mapStateToProps({ ads }) {
+  const { searchTerm, location } = ads
   return {
     ads,
-    term,
+    searchTerm,
     location
   }
 }
@@ -133,7 +134,7 @@ const ListItem = styled.li`
   grid-gap: 2rem;
   align-items: start;
   border-bottom: 2px solid ${props => props.theme.secondary};
-  padding: 1.5rem 1.5rem 0;
+  padding: 1.5rem;
 `
 
 const ItemInfo = styled.div`
@@ -148,8 +149,8 @@ const ItemTitle = styled.h2`
   text-overflow: ellipsis;
 `
 
-const ItemDeadline = styled.p`
-  justify-self: end;
-  align-self: end;
-  padding: 1rem;
-`
+// const ItemDeadline = styled.p`
+//   justify-self: end;
+//   align-self: end;
+//   padding: 1rem;
+// `

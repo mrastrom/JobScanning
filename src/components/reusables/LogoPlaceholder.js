@@ -6,8 +6,10 @@ const LogoPlaceholder = ({ employer, padding, desktop }) => {
     return (
       <StyledImg src={employer.logoUrl} padding={padding} desktop={desktop} />
     )
-  } else {
+  } else if (employer.name) {
     return <StyledH3>{employer.name}</StyledH3>
+  } else {
+    return null
   }
 }
 

@@ -26,7 +26,8 @@ const JobDetailsDesktop = ({ selectedAd }) => {
       </Header>
       <Content>
         <p>
-          <BoldText>Kommun:</BoldText> {location.translations['sv-SE']}
+          <BoldText>Kommun:</BoldText>{' '}
+          {location && location.translations['sv-SE']}
         </p>
         <p>
           <BoldText>Publicerad:</BoldText>{' '}

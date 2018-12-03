@@ -1,17 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
 import CountUp from 'react-countup'
+
+import { ButtonLink, DisplayNumber } from '../components'
+
 import theme from '../styles/theme'
+import { diagonalSlide } from '../styles/animations/diagonalSlide'
+import breakpoint from '../styles/breakpoints'
 import homePageBackground from '../images/background.png'
 import jt_logowhite from '../images/logo/2x/jt_logowhite@2x.png'
 
-import { ButtonLink, DisplayNumber } from '../components'
-import { diagonalSlide } from '../styles/animations/diagonalSlide'
-import breakpoint from '../styles/breakpoints'
-
 export default () => {
   return (
-    <div style={{ height: '100%', position: 'relative', overflow: 'hidden' }}>
+    <Container>
       <Background />
       <Header>
         <h1>Alla jobb på ett ställe</h1>
@@ -37,13 +38,19 @@ export default () => {
           bgcolor={theme.primary}
         />
       </Header>
-    </div>
+    </Container>
   )
 }
 
+const Container = styled.div`
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+`
+
 const Background = styled.div`
-  height: 3000px;
-  width: 3000px;
+  height: calc(100vh * 2);
+  width: calc(100vw * 2);
   background: url('${homePageBackground}') repeat;
   background-position: right bottom;
   animation: ${diagonalSlide} 20s linear infinite;
@@ -56,7 +63,7 @@ const Background = styled.div`
 const Header = styled.header`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   min-height: 55vh;
   text-align: center;

@@ -18,13 +18,13 @@ class AdDetails extends Component {
   }
 
   getAdDetails = groupId => {
-    let { hits, processedList } = this.props.ads
+    let { hits, processedList } = this.props
 
     let duplicatedGroupId = _.filter(hits, item => {
       return item.group.id === groupId
     })
 
-    if (!processedList) {
+    if (!processedList.length > 0) {
       return <NoResultsBox adDetails />
     } else {
       let {
@@ -72,8 +72,10 @@ class AdDetails extends Component {
 }
 
 function mapStateToProps({ ads }) {
+  const { hits, processedList } = ads
   return {
-    ads
+    hits,
+    processedList
   }
 }
 

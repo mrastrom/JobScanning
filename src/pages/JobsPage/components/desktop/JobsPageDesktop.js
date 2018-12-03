@@ -21,7 +21,7 @@ class AdsPage extends Component {
   selectAd = selectedAd => {
     console.log(selectedAd)
 
-    const duplicatedGroupId = _.filter(this.props.ads.hits, item => {
+    const duplicatedGroupId = _.filter(this.props.hits, item => {
       return item.group.id === selectedAd.group.id
     })
 
@@ -42,23 +42,25 @@ class AdsPage extends Component {
           <List>
             <AdsList selectAd={this.selectAd} />
           </List>
-          <Details>
-            {selected ? (
-              <JobDetailsDesktop selectedAd={selectedAd} />
-            ) : (
-              <div style={{ height: '40vh' }} />
-            )}
-          </Details>
-          <Text>
-            {selected ? (
-              <DescriptionContainer
-                text={selectedAd.content.text}
-                source={selectedAd.duplicatedGroupId}
-              />
-            ) : (
-              <div style={{ height: '40vh' }} />
-            )}
-          </Text>
+          <Ad>
+            <Details>
+              {selected ? (
+                <JobDetailsDesktop selectedAd={selectedAd} />
+              ) : (
+                <div style={{ height: '40vh' }} />
+              )}
+            </Details>
+            <Text>
+              {selected ? (
+                <DescriptionContainer
+                  text={selectedAd.content.text}
+                  source={selectedAd.duplicatedGroupId}
+                />
+              ) : (
+                <div style={{ height: '40vh' }} />
+              )}
+            </Text>
+          </Ad>
           <Ranks>
             <AdsOverview />
           </Ranks>
@@ -72,8 +74,10 @@ class AdsPage extends Component {
 }
 
 function mapStateToProps({ ads }) {
+  const { hits } = ads
+
   return {
-    ads
+    hits
   }
 }
 
@@ -85,36 +89,39 @@ export default connect(
 const Content = styled.div`
   width: 75%;
   display: grid;
-  grid-template-rows: auto auto auto;
+  grid-template-rows: auto auto;
   grid-template-columns: 2fr 3fr;
-  grid-template-areas: 'list details' 'list text' 'ranks map';
   grid-gap: 7px;
-
-  & > div {
-    background: #fff;
-    box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.5);
-  }
 `
 
-const List = styled.div`
-  grid-area: list;
+const Box = styled.div`
+  background: #fff;
+  box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.5);
+`
+
+const List = styled(Box)`
+  grid-row: 1/2;
+  grid-column: 1/2;
   overflow: auto;
+  height: 75vh;
 `
 
-const Details = styled.div`
-  grid-area: details;
+const Ad = styled.div`
+  grid-row: 1/2;
+  grid-column: 2/3;
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-gap: 7px;
+`
+
+const Details = styled(Box)`
+  padding: 2rem 4rem 4rem 4rem;
+`
+
+const Text = styled(Box)`
   padding: 2rem 4rem 1rem 4rem;
 `
 
-const Text = styled.div`
-  grid-area: text;
-  padding: 2rem 4rem 1rem 4rem;
-`
+const Ranks = styled(Box)``
 
-const Ranks = styled.div`
-  grid-area: ranks;
-`
-
-const Map = styled.div`
-  grid-area: map;
-`
+const Map = styled(Box)``

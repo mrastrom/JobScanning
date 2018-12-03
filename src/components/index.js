@@ -12,7 +12,7 @@ import PageHeaderAds from '../pages/JobsPage/components/PageHeaderAds'
 
 import AdsList from '../pages/JobsPage/components/AdsList'
 import AdsMap from '../pages/JobsPage/components/AdsMap'
-import AdsOverview from '../pages/JobsPage/components/AdsOverview'
+import AdsOverview from '../containers/AdsOverview'
 
 import SubHeader from './reusables/adcomponents/SubHeader'
 import Title from './reusables/adcomponents/Title'

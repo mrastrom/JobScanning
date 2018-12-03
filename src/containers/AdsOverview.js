@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import _ from 'lodash'
-import { CustomLoader, NoResultsBox } from '../../../components'
-import getLogo from '../../../utils/getLogo'
-import numberOfUniqueSources from '../../../utils/numberOfUniqueSources'
+import { CustomLoader, NoResultsBox } from '../components'
+import getLogo from '../utils/getLogo'
+import numberOfUniqueSources from '../utils/numberOfUniqueSources'
 
 class AdsOverview extends Component {
   getRanks = () => {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { BoldText, GridContainer, PageHeader } from '../components'
-import SearchForm from '../components/reusables/SearchForm'
+import SearchForm from '../containers/SearchForm'
 
 class SearchPage extends Component {
   render() {
@@ -15,7 +15,7 @@ class SearchPage extends Component {
           jobbsajter
         </p>
 
-        <SearchForm />
+        <SearchForm upward={true} />
       </GridContainer>
     )
   }
