@@ -10,7 +10,7 @@ COPY . /usr/src/app
 RUN npm run build
 
 # production environment
-FROM nginx:1.15.8-1-stretch
+FROM nginx:1.15.8
 COPY --from=builder /usr/src/app/build /usr/share/nginx/html
 # ensure www-data user exists
 #RUN set -x ; \
