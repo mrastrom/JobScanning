@@ -25,6 +25,10 @@
     "semantic-ui-react": "^0.82.5",
     "styled-components": "^4.0.3"
   },
+  "engine": {
+    "node": "*",
+    "npm": "*"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
