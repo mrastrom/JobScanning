@@ -12,15 +12,12 @@ RUN npm run build
 # production environment
 FROM nginx:1.15.8
 COPY --from=builder /usr/src/app/build /usr/share/nginx/html
-# ensure www-data user exists
-#RUN set -x ; \
-#  addgroup -g 82 -S www-data ; \
-#  adduser -u 82 -D -S -G www-data www-data && exit 0 ; exit 1
-#RUN touch /var/run/nginx.pid && \
-#  chown -R www-data:www-data /var/run/nginx.pid && \
-#  chown -R www-data:www-data /var/cache/nginx
+# assumps user  nginx
+RUN touch /var/run/nginx.pid && \
+  chown -R nginx:nginx /var/run/nginx.pid && \
+  chown -R nginx:nginx /var/cache/nginx
 
-#USER www-data
+#USER nginx
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
