@@ -10,16 +10,17 @@ COPY . /usr/src/app
 RUN npm run build
 
 # production environment
-FROM nginx:1.13.9-alpine
+FROM nginx:1.15.8-1-stretch
 COPY --from=builder /usr/src/app/build /usr/share/nginx/html
 # ensure www-data user exists
-RUN set -x ; \
-  addgroup -g 82 -S www-data ; \
-  adduser -u 82 -D -S -G www-data www-data && exit 0 ; exit 1
-RUN touch /var/run/nginx.pid && \
-  chown -R www-data:www-data /var/run/nginx.pid && \
-  chown -R www-data:www-data /var/cache/nginx
+#RUN set -x ; \
+#  addgroup -g 82 -S www-data ; \
+#  adduser -u 82 -D -S -G www-data www-data && exit 0 ; exit 1
+#RUN touch /var/run/nginx.pid && \
+#  chown -R www-data:www-data /var/run/nginx.pid && \
+#  chown -R www-data:www-data /var/cache/nginx
 
-USER www-data
+#USER www-data
+
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
